@@ -15,13 +15,11 @@
   <!-- ========================================== -->
   <script>
     
-    const params = new URLSearchParams(window.location.search);
+    window.TARGET_PACKAGE_NAME =
+    new URLSearchParams(window.location.search).get("game") ||
+    "com.supercell.brawlstars";
 
-window.TARGET_PACKAGE_NAME =
-    params.get("game") || "com.supercell.brawlstars";
-
-window.TARGET_GAME_TITLE =
-    "CloudMoon Embedded Game";
+window.TARGET_GAME_TITLE = "CloudMoon Embedded Game";
   </script>
   <!-- ========================================== -->
 
