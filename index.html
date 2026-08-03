@@ -15,7 +15,8 @@
         data: function() {
           return {
             uiCategories: [],
-            defaultAllCategory: 'All'
+            defaultAllCategory: 'All',
+            autoCloseSidebar: true
           };
         }
       });
@@ -47,6 +48,20 @@
     
     body { background: #000; margin: 0; overflow: hidden; color: white; }
     .layout-wrapper { display: flex; flex-direction: row; width: 100vw; height: 100vh; overflow: hidden; background: #1e2831; position: fixed; top: 0; left: 0; }
+    
+    /* Dynamic Sidebar Overlay styling */
+    #main-sidebar-container {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .sidebar-overlay-mode {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      z-index: 1000 !important;
+      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    }
+
     .sidebar-left { width: 380px; flex-shrink: 0; background: #151d23; border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; position: relative; z-index: 10; height: 100vh; }
     .main-right { flex: 1; position: relative; background: #0f172a; overflow: hidden; height: 100vh; }
     
@@ -111,13 +126,22 @@
     <div class="layout-wrapper relative flex w-screen h-screen overflow-hidden">
       
       <!-- SIDEBAR -->
-      <div v-show="isPlaying" id="main-sidebar-container" :class="['transition-all duration-300 relative h-full flex flex-col shrink-0 bg-[#151d23] border-r border-white/5 w-[380px] opacity-100 z-50']">
-        <div class="p-6 border-b border-white/5 flex items-center justify-between">
-          <div class="flex items-center gap-3">
+      <div v-show="isPlaying" id="main-sidebar-container" :class="[autoCloseSidebar ? 'sidebar-overlay-mode' : '']" class="transition-all duration-300 flex flex-col shrink-0 bg-[#151d23] border-r border-white/5 w-[380px] opacity-100 z-50">
+        
+        <!-- SIDEBAR TOP HEADER -->
+        <div class="p-6 border-b border-white/5 flex items-center justify-between gap-2">
+          <div class="flex items-center gap-3 overflow-hidden">
             <img v-if="selectedGame" :src="selectedGame.icon" class="w-10 h-10 flex-shrink-0 object-cover rounded-lg shadow-lg border border-white/10">
-            <h1 v-if="selectedGame" class="text-lg font-black text-white leading-tight truncate max-w-[180px]">{{selectedGame.title}}</h1>
+            <h1 v-if="selectedGame" class="text-base font-black text-white leading-tight truncate max-w-[140px]">{{selectedGame.title}}</h1>
+          </div>
+          
+          <!-- Overlay Switch in Sidebar Top Header -->
+          <div class="flex items-center gap-2 bg-[#0f172a] px-3 py-1.5 rounded-xl border border-white/5 shrink-0 shadow-inner">
+            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Overlay</span>
+            <label class="mini-switch flex items-center" style="margin: 0;"><input type="checkbox" v-model="autoCloseSidebar"><span class="mini-slider"></span></label>
           </div>
         </div>
+
         <div class="flex-1 overflow-y-auto p-6 custom-scrollbar" :class="{'opacity-30 pointer-events-none': !streamingOn}">
           <p class="text-[10px] text-gray-500 font-bold uppercase tracking-widest text-center mb-4">Game Controls & Settings</p>
           <div class="control-grid">
@@ -405,13 +429,13 @@
           sb.classList.replace('w-0', 'w-[380px]');
           sb.classList.replace('opacity-0', 'opacity-100');
           sb.classList.remove('overflow-hidden', 'border-none');
-          this.style.left = '364px';
+          this.style.left = document.getElementById('app').__vue__.autoCloseSidebar ? '364px' : '384px';
           icon.setAttribute('data-lucide', 'chevron-left');
         }
         if(window.lucide) lucide.createIcons();
       "
       style="left: 364px;"
-      class="fixed top-1/2 -translate-y-1/2 z-[999] bg-[#1e2831] border border-white/10 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded-full p-1.5 shadow-xl transition-all duration-300"
+      class="fixed top-1/2 -translate-y-1/2 z-[1001] bg-[#1e2831] border border-white/10 hover:bg-[#8b5cf6] text-gray-400 hover:text-white rounded-full p-1.5 shadow-xl transition-all duration-300"
       v-show="isPlaying"
       type="button"
     >
@@ -483,6 +507,64 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
       
       if (vm.defaultAllCategory === undefined || vm.defaultAllCategory === 'All') {
          vm.$set(vm, 'defaultAllCategory', vm.activeCategory !== undefined ? vm.activeCategory : 'All');
+      }
+
+      if (vm.autoCloseSidebar === undefined) {
+         vm.$set(vm, 'autoCloseSidebar', true);
+      }
+
+      // --- AUTO CLOSE & CONDITIONAL OVERLAY SIDEBAR WATCHER ---
+      if (!vm._autoCloseSetup) {
+          vm._autoCloseSetup = true;
+          vm.$watch('isPlaying', function(newVal) {
+              const sb = document.getElementById('main-sidebar-container');
+              const btn = document.getElementById('sidebar-toggle-btn');
+              if (!sb) return;
+
+              if (newVal) {
+                  // Only apply overlay mode if Auto Close / Overlay switch is enabled
+                  if (vm.autoCloseSidebar) {
+                      sb.classList.add('sidebar-overlay-mode');
+                      setTimeout(() => {
+                          if (sb.classList.contains('w-[380px]')) {
+                              sb.classList.replace('w-[380px]', 'w-0');
+                              sb.classList.replace('opacity-100', 'opacity-0');
+                              sb.classList.add('overflow-hidden', 'border-none');
+                              if (btn) {
+                                  btn.style.left = '12px';
+                                  const icon = btn.querySelector('i');
+                                  if(icon) icon.setAttribute('data-lucide', 'chevron-right');
+                              }
+                              if(window.lucide) lucide.createIcons();
+                          }
+                      }, 150);
+                  } else {
+                      // Normal mode: stays open right next to the game stream
+                      sb.classList.remove('sidebar-overlay-mode');
+                      sb.classList.replace('w-0', 'w-[380px]');
+                      sb.classList.replace('opacity-0', 'opacity-100');
+                      sb.classList.remove('overflow-hidden', 'border-none');
+                      if (btn) {
+                          btn.style.left = '364px';
+                          const icon = btn.querySelector('i');
+                          if(icon) icon.setAttribute('data-lucide', 'chevron-left');
+                      }
+                      if(window.lucide) lucide.createIcons();
+                  }
+              } else {
+                  // Game closed: reset everything to default browsing layout
+                  sb.classList.remove('sidebar-overlay-mode');
+                  sb.classList.replace('w-0', 'w-[380px]');
+                  sb.classList.replace('opacity-0', 'opacity-100');
+                  sb.classList.remove('overflow-hidden', 'border-none');
+                  if (btn) {
+                      btn.style.left = '364px';
+                      const icon = btn.querySelector('i');
+                      if(icon) icon.setAttribute('data-lucide', 'chevron-left');
+                  }
+                  if(window.lucide) lucide.createIcons();
+              }
+          });
       }
 
       // --- DYNAMIC CATEGORY SNIFFER ---
