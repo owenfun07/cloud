@@ -25,7 +25,7 @@
   <script src="https://cdn.jsdelivr.net/npm/socket.io-client@2.4.0/dist/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios@0.26.0/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.all.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/adapterjs@0.15.5/publish/adapter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/webrtc-adapter@8.2.3/out/adapter.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/loglevel@1.9.2/dist/loglevel.min.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/themes/material-ui.css" rel="stylesheet">
@@ -341,7 +341,7 @@
                 <div class="h-3 bg-white/10 rounded w-5/6 skeleton"></div>
                 <div class="h-3 bg-white/10 rounded w-4/6 skeleton"></div>
              </div>
-             <div v-else-if="gameDetails" class="text-sm text-gray-300 leading-relaxed max-h-[140px] overflow-y-auto custom-scrollbar pr-2 whitespace-pre-wrap" v-html="gameDetails.description ? gameDetails.description : 'Experience ' + (gameDetails.title || selectedGame.title) + ' instantly via CloudMoon\'s high-performance cloud gaming network. No downloads, no waiting.'"></div>
+             <div v-else-if="gameDetails" class="text-sm text-gray-300 leading-relaxed max-h-[140px] overflow-y-auto custom-scrollbar pr-2 whitespace-pre-wrap" v-html="gameDetails.description ? gameDetails.description : `Experience ${gameDetails.title || selectedGame.title} instantly via CloudMoon's high-performance cloud gaming network. No downloads, no waiting.`"></div>
           </div>
 
           <button @click="startGameInAio" class="w-full py-4 bg-[#8b5cf6] text-white font-bold text-base rounded-2xl shadow-lg shadow-purple-500/20 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 mt-1 active:scale-95">
@@ -440,14 +440,6 @@
         </div>
       </div>
     </div>
-
-    <button 
-      onclick="const p = document.getElementById('custom-dev-console-panel'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; if(window.lucide) lucide.createIcons();" 
-      class="fixed bottom-4 right-4 bg-[#8b5cf6]/90 hover:bg-[#8b5cf6] text-white p-3 rounded-full shadow-2xl transition z-[9999] border border-white/10 active:scale-95 group"
-      title="Toggle Developer Console"
-    >
-      <i data-lucide="bug" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
-    </button>
 </div>
 
 <script>
@@ -455,7 +447,7 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
 </script>
 
 <script>
-  // Dynamic Console Log Interceptor & Direct JSON Scraper
+  // Dynamic Console Log Interceptor & Direct Native API Watcher
   (function() {
     const logBox = document.getElementById('dev-console-logs');
     window.clearDevConsoleLogs = () => { if(logBox) logBox.innerHTML = ''; };
@@ -476,6 +468,8 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
     console.log = function(...args) { _origLog.apply(console, args); addLogToUI(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), 'log'); };
     console.warn = function(...args) { _origWarn.apply(console, args); addLogToUI(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), 'warn'); };
     console.error = function(...args) { _origError.apply(console, args); addLogToUI(args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(' '), 'error'); };
+
+    const metadataCache = new Map(); // Caches game API details to prevent duplicate fetching
 
     const initDetailsWatcher = () => {
       const appEl = document.getElementById('app');
@@ -512,7 +506,7 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
           }
       }
 
-      // --- DIRECT JSON & HTML FALLBACK SCRAPER WATCHER ---
+      // --- DIRECT NATIVE API WATCHER WITH CACHING ---
       vm.$watch('selectedGame', function(newVal) {
         if (!newVal) {
           vm.$set(vm, 'gameDetails', null);
@@ -524,208 +518,101 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
 
         console.log(`[Dev] Vue Watcher caught game: "${newVal.title}" (ID: "${newVal.id}", PKG: "${newVal.pkg}")`);
 
+        const id = newVal.pkg || newVal.id;
+
+        // 1. CACHE CHECK: If we already fetched this game, load it instantly
+        if (metadataCache.has(id)) {
+            console.log(`[Dev] Cache HIT for ${id}. Loading instantly without API request.`);
+            vm.$set(vm, 'gameDetails', metadataCache.get(id));
+            vm.$set(vm, 'detailsLoading', false);
+            vm.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+            return;
+        }
+
         vm.$set(vm, 'detailsLoading', true);
         vm.$set(vm, 'gameDetails', { ...newVal }); // Show immediate card fallback
 
-        const fetchDetails = (id) => {
+        // We use the internal routing structure.
+        // vm.customFetch appends device_id, query_uuid, site=cm, device_type=web naturally!
+        const endpoints = [
+            'game/info?pkg=', 
+            'api/pub/game/info?pkg=', 
+            'game/detail?pkg=', 
+            'api/pub/game/detail?pkg='
+        ];
+
+        console.log(`[Dev] Fetching native metadata directly via CloudMoon API for ${id}...`);
+
+        const fetchPromises = endpoints.map(ep => {
             return new Promise((resolve, reject) => {
-                const tryAPI = () => {
-                    const endpoints = [
-                        'api/pub/game/detail?pkg=', 'api/pub/app/detail?pkg=', 'api/pub/game/info?pkg=', 
-                        'api/pub/app/info?pkg=', 'app/detail?pkg=', 'game/detail?pkg=', 'api/pub/game/detail?id=', 'app/detail?id='
-                    ];
-                    let rejectedCount = 0;
-                    let resolved = false;
-
-                    endpoints.forEach(ep => {
-                        vm.customFetch(ep + id).then(res => {
-                            if (!resolved && res && res.code === 0 && res.data) {
-                                resolved = true;
-                                resolve(res);
-                            } else {
-                                rejectedCount++;
-                                if (rejectedCount === endpoints.length && !resolved) reject(new Error("Scrape and APIs failed"));
-                            }
-                        }).catch(() => {
-                            rejectedCount++;
-                            if (rejectedCount === endpoints.length && !resolved) reject(new Error("Scrape and APIs failed"));
-                        });
-                    });
-                };
-
-                const tryHtmlScrape = () => {
-                    const scrapeUrl = 'https://web.cloudmoonapp.com/game/' + id + '/';
-                    console.log(`[Dev] Racing multiple proxy scrapers for HTML fallback: ${scrapeUrl}`);
-
-                    const makeHtmlScraper = (proxyBase, name, isAllOrigins) => {
-                        return new Promise(async (resolveScrape, rejectScrape) => {
-                            try {
-                                const proxyUrl = proxyBase + encodeURIComponent(scrapeUrl);
-                                const r = await fetch(proxyUrl);
-                                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                                const text = await r.text();
-
-                                let html = text;
-                                if (isAllOrigins) {
-                                    const wrapper = JSON.parse(text);
-                                    if (!wrapper.contents) throw new Error('Empty proxy contents');
-                                    html = wrapper.contents;
-                                }
-
-                                if (!html || html.length < 500 || html.includes('Just a moment...')) {
-                                    throw new Error('Blocked by Cloudflare or empty');
-                                }
-
-                                const parser = new DOMParser();
-                                const doc = parser.parseFromString(html, 'text/html');
-
-                                let finalDescription = '';
-                                let extractedImages = [];
-                                let bannerImg = null;
-                                let foundJsonData = false;
-
-                                const jsonScripts = doc.querySelectorAll('script[type="application/json"]');
-                                for (let i = 0; i < jsonScripts.length; i++) {
-                                    try {
-                                        const parsedData = JSON.parse(jsonScripts[i].textContent);
-                                        if (parsedData && parsedData.body && typeof parsedData.body === 'string') {
-                                            const gameData = JSON.parse(parsedData.body);
-                                            if (gameData.desc || gameData.images) {
-                                                const shortDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content') || '';
-                                                let longDesc = gameData.desc || '';
-                                                if (shortDesc) finalDescription += `<b class="block text-white mb-2 font-bold text-sm">${shortDesc}</b>`;
-                                                if (longDesc) finalDescription += `<span class="text-xs text-gray-300">${longDesc}</span>`; 
-                                                if (gameData.images && Array.isArray(gameData.images)) extractedImages = gameData.images;
-                                                foundJsonData = true; 
-                                                break;
-                                            }
-                                        }
-                                    } catch(e) {}
-                                }
-
-                                if (!foundJsonData) {
-                                    const shortDesc = doc.querySelector('meta[name="description"]')?.getAttribute('content') || '';
-                                    const descElement = doc.querySelector('.game-desc');
-                                    let longDesc = descElement ? descElement.innerHTML.replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>/gi, '\n\n').replace(/<[^>]+>/g, '').trim() : '';
-                                    if (shortDesc) finalDescription += `<b class="block text-white mb-2 font-bold text-sm">${shortDesc}</b>`;
-                                    if (longDesc) finalDescription += `<span class="text-xs text-gray-300">${longDesc.replace(/\n/g, '<br>')}</span>`;
-                                    const carouselImages = doc.querySelectorAll('.carousel img');
-                                    carouselImages.forEach(img => { const src = img.getAttribute('src'); if (src) extractedImages.push(src); });
-                                }
-
-                                const ogImage = doc.querySelector('meta[property="og:image"]');
-                                bannerImg = ogImage ? ogImage.getAttribute('content') : null;
-                                extractedImages = [...new Set(extractedImages)].filter(url => url && !url.includes('favicon') && !url.includes('logo') && !url.includes('icon')).slice(0, 8);
-
-                                if (finalDescription.length > 10) {
-                                    console.log(`[Dev] HTML Scraper WINNER: ${name}`);
-                                    resolveScrape({ description: finalDescription, banner: bannerImg, images: extractedImages.length > 0 ? extractedImages : null });
-                                } else {
-                                    throw new Error('No description parsed');
-                                }
-                            } catch (err) {
-                                console.warn(`[Dev] ${name} HTML scrape failed: ${err.message}`);
-                                rejectScrape(err);
-                            }
-                        });
-                    };
-
-                    const p1 = makeHtmlScraper('https://api.allorigins.win/get?url=', 'AllOrigins', true);
-                    const p2 = makeHtmlScraper('https://corsproxy.io/?', 'CorsProxy.io', false);
-                    const p3 = makeHtmlScraper('https://api.codetabs.com/v1/proxy?quest=', 'CodeTabs', false);
-
-                    Promise.any([p1, p2, p3])
-                        .then(result => resolve({ code: 0, data: result }))
-                        .catch(err => {
-                            console.warn(`[Dev] All HTML scrapers failed! Falling back to internal API...`);
-                            tryAPI();
-                        });
-                };
-
-                const tryWebScrape = () => {
-                    const jsonUrl = 'https://web.cloudmoonapp.com/data/games/en/' + id + '.json';
-                    console.log(`[Dev] Racing multiple proxy scrapers for JSON: ${jsonUrl}`);
-
-                    const makeJsonScraper = (proxyBase, name, isAllOrigins) => {
-                        return new Promise(async (resolveScrape, rejectScrape) => {
-                            try {
-                                const proxyUrl = proxyBase + encodeURIComponent(jsonUrl);
-                                const r = await fetch(proxyUrl);
-                                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                                const text = await r.text();
-                                
-                                let dataStr = text;
-                                if (isAllOrigins) {
-                                    const wrapper = JSON.parse(text);
-                                    if (!wrapper.contents) throw new Error('Empty proxy contents');
-                                    dataStr = wrapper.contents;
-                                }
-
-                                let gameData;
-                                try {
-                                    gameData = JSON.parse(dataStr);
-                                } catch(e) {
-                                    throw new Error('Not valid JSON (likely Cloudflare block)');
-                                }
-
-                                if (gameData && (gameData.desc || gameData.images)) {
-                                    console.log(`[Dev] Fast JSON Scraper WINNER: ${name}`);
-                                    let finalDescription = gameData.desc ? `<span class="text-xs text-gray-300">${gameData.desc}</span>` : '';
-                                    let extractedImages = Array.isArray(gameData.images) ? gameData.images : [];
-
-                                    resolveScrape({
-                                        description: finalDescription,
-                                        banner: gameData.banner || null,
-                                        images: extractedImages.length > 0 ? extractedImages : null
-                                    });
-                                } else {
-                                    throw new Error('JSON missing desc or images fields');
-                                }
-                            } catch (e) {
-                                console.warn(`[Dev] ${name} JSON scrape failed: ${e.message}`);
-                                rejectScrape(e);
-                            }
-                        });
-                    };
-
-                    const p1 = makeJsonScraper('https://api.allorigins.win/get?url=', 'AllOrigins', true);
-                    const p2 = makeJsonScraper('https://corsproxy.io/?', 'CorsProxy.io', false);
-                    const p3 = makeJsonScraper('https://api.codetabs.com/v1/proxy?quest=', 'CodeTabs', false);
-
-                    Promise.any([p1, p2, p3])
-                        .then(result => resolve({ code: 0, data: result }))
-                        .catch(err => {
-                            console.warn(`[Dev] All JSON proxies failed! Falling back to HTML scrape...`);
-                            tryHtmlScrape();
-                        });
-                };
-
-                tryWebScrape();
+                vm.customFetch(ep + id).then(res => {
+                    if (res && res.code === 0 && res.data) {
+                        console.log(`[Dev] Successfully fetched native game data from: ${ep}`);
+                        resolve(res.data);
+                    } else {
+                        reject(new Error("Empty or invalid API response"));
+                    }
+                }).catch(reject);
             });
-        };
-
-        fetchDetails(newVal.pkg || newVal.id).then(res => {
-          if (res && res.code === 0 && res.data) {
-            const appInfo = res.data.app_info || res.data || {};
-            if (!appInfo.categories) appInfo.categories = newVal.categories;
-            appInfo.isHigh = newVal.isHigh;
-            appInfo.title = appInfo.title || newVal.title;
-            appInfo.icon = appInfo.icon || newVal.icon;
-            if (!appInfo.images) {
-                let images = [];
-                for (let key in appInfo) {
-                  if (Array.isArray(appInfo[key]) && appInfo[key].length > 0 && typeof appInfo[key][0] === 'string' && appInfo[key][0].startsWith('http')) { images = appInfo[key]; break; }
-                }
-                appInfo.images = images;
-            }
-            vm.$set(vm, 'gameDetails', appInfo);
-          }
-        }).catch(err => {
-          console.warn('[Dev] Retaining fallback card metadata.');
-        }).finally(() => {
-          vm.$set(vm, 'detailsLoading', false);
-          vm.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
         });
+
+        Promise.any(fetchPromises)
+            .then(result => {
+                // Handle different nested payload structures
+                const appInfo = result.app_info || result.game_info || result;
+                
+                // Extract i18n object for the rich metadata!
+                const i18n = appInfo.i18n || {}; 
+                
+                let finalDescription = '';
+                // Prioritize i18n exact data over the default fallbacks
+                const rawDesc = i18n.desc || appInfo.desc || appInfo.description || '';
+                const shortDesc = appInfo.short_desc || appInfo.intro || '';
+
+                if (shortDesc) finalDescription += `<b class="block text-white mb-2 font-bold text-sm">${shortDesc}</b>`;
+                if (rawDesc) finalDescription += `<span class="text-xs text-gray-300">${rawDesc}</span>`;
+
+                let extractedImages = [];
+                // Check i18n.screenshots first, then standard arrays
+                const sourceImages = i18n.screenshots || appInfo.images || appInfo.screenshots;
+                if (Array.isArray(sourceImages) && sourceImages.length > 0) {
+                    extractedImages = sourceImages;
+                } else {
+                    // Fallback scanning
+                    for (let key in appInfo) {
+                        if (Array.isArray(appInfo[key]) && appInfo[key].length > 0 && typeof appInfo[key][0] === 'string' && appInfo[key][0].startsWith('http')) {
+                            extractedImages = appInfo[key];
+                            break;
+                        }
+                    }
+                }
+
+                const cleanData = {
+                    title: i18n.title || appInfo.title || newVal.title,
+                    icon: i18n.icon || appInfo.icon || newVal.icon,
+                    categories: appInfo.categories || newVal.categories || [],
+                    isHigh: appInfo.isHigh !== undefined ? appInfo.isHigh : newVal.isHigh,
+                    description: finalDescription || `Experience ${i18n.title || appInfo.title || newVal.title} instantly via CloudMoon's high-performance cloud gaming network. No downloads, no waiting.`,
+                    images: extractedImages.length > 0 ? extractedImages : null,
+                    banner: appInfo.banner || appInfo.background || null
+                };
+
+                // Save the perfectly formatted data to our in-memory cache
+                metadataCache.set(id, cleanData);
+
+                vm.$set(vm, 'gameDetails', cleanData);
+            })
+            .catch(err => {
+                console.warn('[Dev] Direct API fetch failed. Retaining fallback card metadata.', err);
+                vm.$set(vm, 'gameDetails', {
+                    ...newVal,
+                    description: `Experience ${newVal.title} instantly via CloudMoon's high-performance cloud gaming network. No downloads, no waiting.`
+                });
+            })
+            .finally(() => {
+                vm.$set(vm, 'detailsLoading', false);
+                vm.$nextTick(() => { if (window.lucide) lucide.createIcons(); });
+            });
       });
 
       return true;
