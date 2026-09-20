@@ -226,7 +226,7 @@
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar mb-6 pb-2">
               <button @click="filterByCategory(defaultAllCategory)" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
               
-              <button v-for="cat in uiCategories" :key="cat.id" @click="filterByCategory(cat.id)" :class="activeCategory === cat.id ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
+              <button v-for="cat in uiCategories" :key="cat.id" @click="filterTestCategory(cat)" :class="activeCategory === cat.id ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
                 {{ cat.label }}
               </button>
             </div>
@@ -824,13 +824,34 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
               vm.$set(vm, 'testCategoriesLoading', true);
               try {
                 const response = await vm.customFetch('/game/category');
-                const list = asArray(unwrap(response));
+                const data = unwrap(response);
+                let list = asArray(data);
+
+                // Also support APIs that return an object map:
+                // { "Action": [...games], "Racing": [...games] }
+                if (!list.length && data && typeof data === 'object' && !Array.isArray(data)) {
+                  list = Object.keys(data).map(key => ({
+                    id: key,
+                    name: key,
+                    games: data[key]
+                  }));
+                }
+
                 const cats = list.map((c, i) => {
-                  if (typeof c === 'string') return { id: c, label: c.replace(/_/g, ' ') };
+                  if (typeof c === 'string') {
+                    return { id: c, label: c.replace(/_/g, ' '), api: c };
+                  }
+
                   const id = c.id ?? c.category_id ?? c.value ?? c.name ?? String(i);
                   const label = c.label || c.name || c.title || c.category_name || String(id);
-                  return { id: id, label: String(label).replace(/_/g, ' ') };
+
+                  return {
+                    id: id,
+                    label: String(label).replace(/_/g, ' '),
+                    api: c
+                  };
                 }).filter(c => c.label);
+
                 vm.$set(vm, 'testApiCategories', cats);
                 console.log('[Test Index] /game/category response:', response);
                 console.log('[Test Index] categories:', cats);
@@ -840,6 +861,93 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                 vm.$set(vm, 'testCategoriesLoading', false);
               }
             };
+
+            // Category filtering for the test page.
+            // The API category IDs and the category values inside /game/list are
+            // not necessarily the same representation, so we match both sides.
+            const filterTestCategory = (cat) => {
+              if (!cat) return;
+
+              vm.$set(vm, 'activeCategory', cat.id);
+
+              if (cat.id === vm.defaultAllCategory || String(cat.label).toLowerCase() === 'all') {
+                vm.$set(vm, 'filteredGames', Array.isArray(vm.rawGames) ? vm.rawGames.slice() : []);
+                return;
+              }
+
+              const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
+              const api = cat.api || {};
+
+              const norm = (v) => String(v ?? '')
+                .trim()
+                .toLowerCase()
+                .replace(/[_-]+/g, ' ')
+                .replace(/\\s+/g, ' ');
+
+              const categoryMatches = (value) => {
+                if (value && typeof value === 'object') {
+                  return [
+                    value.id, value.category_id, value.value,
+                    value.name, value.title, value.label
+                  ].some(v => norm(v) === norm(cat.id) || norm(v) === norm(cat.label));
+                }
+                return norm(value) === norm(cat.id) || norm(value) === norm(cat.label);
+              };
+
+              // First try category values already attached to each game.
+              let matched = games.filter(game => {
+                const values = Array.isArray(game.categories)
+                  ? game.categories
+                  : (game.category !== undefined ? [game.category] : []);
+                return values.some(categoryMatches);
+              });
+
+              // If the API category itself contains game IDs/packages, use those
+              // as a second, more authoritative mapping.
+              const assignmentSources = [
+                api.games, api.game_ids, api.gameIds, api.ids,
+                api.apps, api.items, api.game_list, api.gameList
+              ].filter(Boolean);
+
+              const assignments = [];
+              assignmentSources.forEach(source => {
+                const arr = Array.isArray(source) ? source : [source];
+                arr.forEach(item => {
+                  if (item && typeof item === 'object') {
+                    assignments.push(
+                      item.id ?? item.pkg ?? item.game_id ??
+                      item.game_name ?? item.package_name
+                    );
+                  } else {
+                    assignments.push(item);
+                  }
+                });
+              });
+
+              if (assignments.length) {
+                const assigned = games.filter(game => {
+                  const keys = [
+                    game.id, game.pkg, game.game_id,
+                    game.game_name, game.package_name
+                  ].map(norm);
+                  return assignments.some(a => keys.includes(norm(a)));
+                });
+
+                // Prefer the explicit API assignment when it found games.
+                if (assigned.length) matched = assigned;
+              }
+
+              vm.$set(vm, 'filteredGames', matched);
+
+              console.log('[Test Index] Category filter:', {
+                id: cat.id,
+                label: cat.label,
+                matched: matched.length,
+                totalGames: games.length,
+                apiCategory: api
+              });
+            };
+
 
             const loadRecent = async () => {
               vm.$set(vm, 'testRecentLoading', true);
@@ -864,6 +972,17 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             setTimeout(() => {
               loadCategories();
               loadRecent();
+
+              // Keep the test grid populated while no category is selected.
+              const syncGames = setInterval(() => {
+                if (Array.isArray(vm.rawGames) && vm.rawGames.length) {
+                  if (vm.activeCategory === vm.defaultAllCategory) {
+                    vm.$set(vm, 'filteredGames', vm.rawGames.slice());
+                  }
+                  clearInterval(syncGames);
+                }
+              }, 100);
+              setTimeout(() => clearInterval(syncGames), 10000);
             }, 500);
             return true;
           };
