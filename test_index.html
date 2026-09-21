@@ -301,12 +301,12 @@
               <span class="text-[9px] text-gray-500 uppercase tracking-widest">From API</span>
             </div>
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
-              <button @click="filterByCategory(defaultAllCategory)"
+              <button @click="filterTestCategory({ id: defaultAllCategory, label: 'All', isAll: true, api: { id: defaultAllCategory } })"
                 :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white' : 'bg-[#222a31] text-gray-400'"
                 class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap uppercase tracking-wider">
                 All
               </button>
-              <button v-for="cat in testApiCategories" :key="'cat-'+cat.id" @click="filterByCategory(cat.id)"
+              <button v-for="cat in testApiCategories" :key="'cat-'+cat.id" @click="filterTestCategory(cat)"
                 :class="activeCategory === cat.id ? 'bg-[#7c4dff] text-white' : 'bg-[#222a31] text-gray-400'"
                 class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap uppercase tracking-wider">
                 {{cat.label}}
@@ -896,19 +896,53 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
               const numericId = Number(rawId);
               const hasNumericId = Number.isFinite(numericId);
 
+              // The important part of the test page: /game/category gives us
+              // the buttons, while /game/list already gives every game its
+              // real category strings (for example: "action", "shooter",
+              // "tactical_shooter"). Build a set of every useful identifier
+              // from the clicked API category, then match those identifiers
+              // against the categories already attached to each game.
+              const normalizeCategory = (value) => String(value ?? '')
+                .trim()
+                .toLowerCase()
+                .replace(/&/g, 'and')
+                .replace(/[\\s-]+/g, '_')
+                .replace(/[^a-z0-9_]/g, '');
+
+              const categoryCandidates = [
+                rawId,
+                category.name,
+                category.label,
+                category.title,
+                category.category,
+                category.category_name,
+                category.categoryName,
+                category.slug,
+                category.value,
+                cat.label,
+                cat.id
+              ]
+                .filter(v => v !== undefined && v !== null && String(v).trim() !== '')
+                .flatMap(v => [v, String(v).replace(/_/g, ' ')])
+                .map(normalizeCategory)
+                .filter(Boolean);
+
+              const candidateSet = new Set(categoryCandidates);
+
               const matches = (value) => {
-                // portal.html effectively does:
-                // categories.includes(activeCategory) ||
-                // categories.includes(parseInt(activeCategory))
+                const normalizedValue = normalizeCategory(value);
+                if (!normalizedValue) return false;
+
+                // Direct/string/number ID matches.
                 if (value === rawId) return true;
                 if (hasNumericId && value === numericId) return true;
-
-                // Extra compatibility for APIs that serialize the number as a
-                // string or return a numeric-looking value.
                 if (String(value) === String(rawId)) return true;
                 if (hasNumericId && String(value) === String(numericId)) return true;
 
-                return false;
+                // Normalized name/label/slug matches. This is what lets an
+                // API category such as "Action" select games whose native
+                // category is already "action".
+                return candidateSet.has(normalizedValue);
               };
 
               const matched = games.filter(game =>
