@@ -979,6 +979,43 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             vm.$set(vm, 'filterTestCategory', filterTestCategory);
 
             console.log('[Test Index] Category filter handler attached to Vue instance.');
+            // TEST-ONLY LIVE REMOTE TEXT INPUT
+            // CloudMoon's soft-input protocol accepts the complete current text
+            // with every text_change message. This makes the remote field update
+            // as the user types instead of waiting for Enter.
+            if (!vm.__testLiveInputSyncAttached) {
+              vm.__testLiveInputSyncAttached = true;
+
+              vm.$nextTick(() => {
+                const inputEl = document.getElementById('input-div_input');
+                if (!inputEl) {
+                  console.warn('[Test Index] Live input sync: input element not found.');
+                  vm.__testLiveInputSyncAttached = false;
+                  return;
+                }
+
+                inputEl.addEventListener('input', () => {
+                  try {
+                    if (typeof vm.sendDataChannelMessage !== 'function') {
+                      console.warn('[Test Index] Live input sync: sendDataChannelMessage is unavailable.');
+                      return;
+                    }
+
+                    const value = inputEl.value;
+                    const count = vm.inputTextCnt++;
+                    const message = 'softinput>text_change:' + count + ':0,99999,' + value;
+
+                    vm.sendDataChannelMessage(message);
+                    console.log('[Test Index] LIVE TEXT:', JSON.stringify(value));
+                  } catch (error) {
+                    console.error('[Test Index] Live input sync failed:', error);
+                  }
+                });
+
+                console.log('[Test Index] Live character-by-character input sync attached.');
+              });
+            }
+
             const loadRecent = async () => {
               vm.$set(vm, 'testRecentLoading', true);
               try {
