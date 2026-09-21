@@ -525,7 +525,16 @@
       <i data-lucide="chevron-left" class="w-4 h-4"></i>
     </button>
 
-    <!-- DYNAMIC ON-SCREEN DEVELOPER CONSOLE -->
+    <!-- TEST-ONLY DEVELOPER CONSOLE TOGGLE -->
+<button
+  onclick="const p = document.getElementById('custom-dev-console-panel'); p.style.display = p.style.display === 'none' ? 'flex' : 'none'; if(window.lucide) lucide.createIcons();"
+  class="fixed bottom-4 right-4 bg-[#8b5cf6]/90 hover:bg-[#8b5cf6] text-white p-3 rounded-full shadow-2xl transition z-[9999] border border-white/10 active:scale-95 group"
+  title="Toggle Developer Console"
+>
+  <i data-lucide="bug" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+</button>
+
+<!-- DYNAMIC ON-SCREEN DEVELOPER CONSOLE -->
     <div id="custom-dev-console-panel" style="display:none;" class="fixed bottom-0 left-0 right-0 h-64 bg-black/95 border-t border-purple-500/30 text-xs font-mono text-green-400 p-4 z-[10000] overflow-y-auto flex flex-col gap-2">
       <div class="flex justify-between items-center border-b border-purple-500/20 pb-2 mb-2">
         <span class="font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
