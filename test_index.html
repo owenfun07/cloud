@@ -838,20 +838,25 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                 }
 
                 const cats = list.map((c, i) => {
-                  if (typeof c === 'string') {
-                    return { id: c, label: c.replace(/_/g, ' '), api: c };
+                  if (typeof c === 'string' || typeof c === 'number') {
+                    return {
+                      id: String(c),
+                      label: String(c),
+                      api: c
+                    };
                   }
 
-                  const id = c.id ?? c.category_id ?? c.value ?? c.name ?? String(i);
-                  const label = c.label || c.name || c.title || c.category_name || String(id);
+                  // portal.html uses the category object's ID and name
+                  // directly when rendering/filtering.
+                  const id = c.id ?? c.category_id ?? c.value ?? String(i);
+                  const label = c.name ?? c.label ?? c.title ?? c.category_name ?? String(id);
 
                   return {
-                    id: id,
+                    id: String(id),
                     label: String(label).replace(/_/g, ' '),
                     api: c
                   };
                 }).filter(c => c.label);
-
                 vm.$set(vm, 'testApiCategories', cats);
                 console.log('[Test Index] /game/category response:', response);
                 console.log('[Test Index] categories:', cats);
@@ -868,83 +873,49 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             const filterTestCategory = (cat) => {
               if (!cat) return;
 
-              vm.$set(vm, 'activeCategory', cat.id);
+              // This mirrors portal.html's actual filtering logic.
+              // portal.html does NOT use the category endpoint to contain
+              // game assignments. It uses the category IDs returned by
+              // /game/category and compares them against each game's
+              // categories array returned by /game/list.
+              const categoryId = String(cat.id);
+              vm.$set(vm, 'activeCategory', categoryId);
 
-              if (cat.id === vm.defaultAllCategory || String(cat.label).toLowerCase() === 'all') {
-                vm.$set(vm, 'filteredGames', Array.isArray(vm.rawGames) ? vm.rawGames.slice() : []);
+              const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
+
+              if (categoryId === String(vm.defaultAllCategory) ||
+                  String(cat.label).toLowerCase() === 'all') {
+                vm.$set(vm, 'filteredGames', games.slice());
                 return;
               }
 
-              const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
-              const api = cat.api || {};
+              const numericCategoryId = parseInt(categoryId, 10);
 
-              const norm = (v) => String(v ?? '')
-                .trim()
-                .toLowerCase()
-                .replace(/[_-]+/g, ' ')
-                .replace(/\\s+/g, ' ');
-
-              const categoryMatches = (value) => {
-                if (value && typeof value === 'object') {
-                  return [
-                    value.id, value.category_id, value.value,
-                    value.name, value.title, value.label
-                  ].some(v => norm(v) === norm(cat.id) || norm(v) === norm(cat.label));
-                }
-                return norm(value) === norm(cat.id) || norm(value) === norm(cat.label);
-              };
-
-              // First try category values already attached to each game.
-              let matched = games.filter(game => {
-                const values = Array.isArray(game.categories)
+              const matched = games.filter(game => {
+                const gameCategories = Array.isArray(game.categories)
                   ? game.categories
-                  : (game.category !== undefined ? [game.category] : []);
-                return values.some(categoryMatches);
+                  : [];
+
+                // Exact behavior from portal.html:
+                // game.categories.includes(activeCategory) ||
+                // game.categories.includes(parseInt(activeCategory))
+                return gameCategories.includes(categoryId) ||
+                       (!Number.isNaN(numericCategoryId) &&
+                        gameCategories.includes(numericCategoryId));
               });
-
-              // If the API category itself contains game IDs/packages, use those
-              // as a second, more authoritative mapping.
-              const assignmentSources = [
-                api.games, api.game_ids, api.gameIds, api.ids,
-                api.apps, api.items, api.game_list, api.gameList
-              ].filter(Boolean);
-
-              const assignments = [];
-              assignmentSources.forEach(source => {
-                const arr = Array.isArray(source) ? source : [source];
-                arr.forEach(item => {
-                  if (item && typeof item === 'object') {
-                    assignments.push(
-                      item.id ?? item.pkg ?? item.game_id ??
-                      item.game_name ?? item.package_name
-                    );
-                  } else {
-                    assignments.push(item);
-                  }
-                });
-              });
-
-              if (assignments.length) {
-                const assigned = games.filter(game => {
-                  const keys = [
-                    game.id, game.pkg, game.game_id,
-                    game.game_name, game.package_name
-                  ].map(norm);
-                  return assignments.some(a => keys.includes(norm(a)));
-                });
-
-                // Prefer the explicit API assignment when it found games.
-                if (assigned.length) matched = assigned;
-              }
 
               vm.$set(vm, 'filteredGames', matched);
 
-              console.log('[Test Index] Category filter:', {
-                id: cat.id,
+              console.log('[Test Index] Category filter (portal.html logic):', {
+                categoryId,
+                numericCategoryId,
                 label: cat.label,
                 matched: matched.length,
                 totalGames: games.length,
-                apiCategory: api
+                sampleGameCategories: games.slice(0, 5).map(g => ({
+                  title: g.title,
+                  categories: g.categories
+                }))
               });
             };
 
@@ -979,6 +950,9 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                   if (vm.activeCategory === vm.defaultAllCategory) {
                     vm.$set(vm, 'filteredGames', vm.rawGames.slice());
                   }
+                  console.log('[Test Index] rawGames category sample:',
+                    vm.rawGames.slice(0, 10).map(g => ({ title: g.title, categories: g.categories }))
+                  );
                   clearInterval(syncGames);
                 }
               }, 100);
