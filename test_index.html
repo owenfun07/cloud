@@ -224,7 +224,7 @@
             
             <!-- VUE DYNAMIC CATEGORY BUTTONS -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar mb-6 pb-2">
-              <button @click="filterByCategory(defaultAllCategory)" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
+              <button @click="filterTestCategory({ id: defaultAllCategory, label: 'All', isAll: true, api: { id: defaultAllCategory } })" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
               
               <button v-for="cat in uiCategories" :key="cat.id" @click="filterTestCategory(cat)" :class="activeCategory === cat.id ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
                 {{ cat.label }}
@@ -839,24 +839,20 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
 
                 const cats = list.map((c, i) => {
                   if (typeof c === 'string' || typeof c === 'number') {
-                    return {
-                      id: String(c),
-                      label: String(c),
-                      api: c
-                    };
+                    return { id: c, label: String(c), api: c };
                   }
 
-                  // portal.html uses the category object's ID and name
-                  // directly when rendering/filtering.
-                  const id = c.id ?? c.category_id ?? c.value ?? String(i);
+                  const id = c.id ?? c.category_id ?? c.categoryId ?? c.value ?? String(i);
                   const label = c.name ?? c.label ?? c.title ?? c.category_name ?? String(id);
 
                   return {
-                    id: String(id),
+                    id: id,
                     label: String(label).replace(/_/g, ' '),
                     api: c
                   };
                 }).filter(c => c.label);
+
+                console.log('[Test Index] RAW CATEGORY API DATA:', list);
                 vm.$set(vm, 'testApiCategories', cats);
                 console.log('[Test Index] /game/category response:', response);
                 console.log('[Test Index] categories:', cats);
@@ -873,48 +869,60 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             const filterTestCategory = (cat) => {
               if (!cat) return;
 
-              // This mirrors portal.html's actual filtering logic.
-              // portal.html does NOT use the category endpoint to contain
-              // game assignments. It uses the category IDs returned by
-              // /game/category and compares them against each game's
-              // categories array returned by /game/list.
-              const categoryId = String(cat.id);
-              vm.$set(vm, 'activeCategory', categoryId);
+              // portal.html uses the category object's ORIGINAL id and then
+              // checks each game's categories array. Do not stringify the ID
+              // before filtering; preserve the API value exactly.
+              const category = cat.api || cat;
+              const rawId = category.id ?? category.category_id ?? category.categoryId ?? category.value ?? cat.id;
+              vm.$set(vm, 'activeCategory', rawId);
 
               const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
 
-              if (categoryId === String(vm.defaultAllCategory) ||
-                  String(cat.label).toLowerCase() === 'all') {
+              // "All" is our test-only button.
+              if (cat.isAll || String(cat.label).toLowerCase() === 'all') {
                 vm.$set(vm, 'filteredGames', games.slice());
                 return;
               }
 
-              const numericCategoryId = parseInt(categoryId, 10);
+              const numericId = Number(rawId);
+              const hasNumericId = Number.isFinite(numericId);
 
-              const matched = games.filter(game => {
-                const gameCategories = Array.isArray(game.categories)
-                  ? game.categories
-                  : [];
+              const matches = (value) => {
+                // portal.html effectively does:
+                // categories.includes(activeCategory) ||
+                // categories.includes(parseInt(activeCategory))
+                if (value === rawId) return true;
+                if (hasNumericId && value === numericId) return true;
 
-                // Exact behavior from portal.html:
-                // game.categories.includes(activeCategory) ||
-                // game.categories.includes(parseInt(activeCategory))
-                return gameCategories.includes(categoryId) ||
-                       (!Number.isNaN(numericCategoryId) &&
-                        gameCategories.includes(numericCategoryId));
-              });
+                // Extra compatibility for APIs that serialize the number as a
+                // string or return a numeric-looking value.
+                if (String(value) === String(rawId)) return true;
+                if (hasNumericId && String(value) === String(numericId)) return true;
+
+                return false;
+              };
+
+              const matched = games.filter(game =>
+                Array.isArray(game.categories) &&
+                game.categories.some(matches)
+              );
 
               vm.$set(vm, 'filteredGames', matched);
 
-              console.log('[Test Index] Category filter (portal.html logic):', {
-                categoryId,
-                numericCategoryId,
-                label: cat.label,
+              console.log('[Test Index] CATEGORY DEBUG', {
+                clickedCategory: category,
+                rawId: rawId,
+                rawIdType: typeof rawId,
+                numericId: hasNumericId ? numericId : null,
                 matched: matched.length,
                 totalGames: games.length,
-                sampleGameCategories: games.slice(0, 5).map(g => ({
+                gamesWithCategories: games.filter(g => Array.isArray(g.categories) && g.categories.length).length,
+                sampleCategories: games.slice(0, 10).map(g => ({
                   title: g.title,
-                  categories: g.categories
+                  categories: g.categories,
+                  categoryTypes: Array.isArray(g.categories)
+                    ? g.categories.map(v => typeof v)
+                    : []
                 }))
               });
             };
