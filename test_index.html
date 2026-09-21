@@ -971,6 +971,14 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             };
 
 
+            // Vue template expressions can only access properties/methods
+            // exposed by the Vue instance. The previous test implementation
+            // kept this function inside the API bridge IIFE, so clicking a
+            // category raised a template ReferenceError and effectively did
+            // nothing. Expose the bridge function directly on vm.
+            vm.$set(vm, 'filterTestCategory', filterTestCategory);
+
+            console.log('[Test Index] Category filter handler attached to Vue instance.');
             const loadRecent = async () => {
               vm.$set(vm, 'testRecentLoading', true);
               try {
