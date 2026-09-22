@@ -16,7 +16,10 @@
           return {
             uiCategories: [],
             defaultAllCategory: 'All',
-            autoCloseSidebar: true
+            autoCloseSidebar: true,
+            // Recently Played (API-backed)
+            recentGames: [],
+            recentGamesLoading: false
           };
         }
       });
@@ -90,6 +93,11 @@
     .input-div_input { display: block; width: 100%; height: 100%; outline: none; border-radius: 1.5rem; padding: 0 6rem 0 1.5rem; font-size: 1.4rem; box-sizing: border-box; position: relative; background: #fff; z-index: 2; opacity: 0.7; color:#000; }
     .input-div_div { position: absolute; width: 6rem; right: 0; bottom: 0; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 3; }
     .input-div_div_button { background-color: #7B6CC4; width: 4rem; height: 1.8rem; border: 0; border-radius: 0.9rem; opacity: 1; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    /* Native-feeling CloudMoon text input: keep the engine input functional but invisible. */
+    #input-div.test-invisible-input { opacity: 0 !important; background: transparent !important; pointer-events: none !important; }
+    #input-div.test-invisible-input .input-div_input { opacity: 0 !important; background: transparent !important; color: transparent !important; caret-color: transparent !important; border: 0 !important; box-shadow: none !important; pointer-events: none !important; }
+    #input-div.test-invisible-input .input-div_div { display: none !important; }
+
     
     /* Modern Cyber Loading Screen */
     .loading { position: absolute !important; inset: 0 !important; z-index: 1001 !important; background: radial-gradient(circle at center, #1e2831 0%, #0f172a 100%) !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
@@ -231,6 +239,24 @@
               </button>
             </div>
 
+            <!-- Recently Played: API-backed, no category dependency -->
+            <section v-if="recentGames && recentGames.length" class="mb-8">
+              <div class="flex items-center justify-between mb-4">
+                <h2 class="text-lg font-black">Recently Played</h2>
+                <span class="text-[9px] text-gray-500 uppercase tracking-widest">From API</span>
+              </div>
+              <div class="flex gap-4 overflow-x-auto no-scrollbar pb-2">
+                <div v-for="g in recentGames" :key="'recent-'+g.id" @click="selectGame(g)"
+                  class="relative w-48 h-28 shrink-0 rounded-2xl overflow-hidden group cursor-pointer border border-white/5 bg-[#1b2228]">
+                  <img :src="g.icon" onerror="this.src='https://cloudmoonapp.com/favicon.ico'"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-3 flex flex-col justify-end">
+                    <h3 class="font-bold text-xs truncate">{{g.title}}</h3>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             <!-- VUE DRIVEN GRID (Using strict original method: selectGame) -->
             <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               <div 
@@ -298,7 +324,7 @@
               </div>
 
               <!-- INPUT-DIV -->
-              <div id="input-div" class="input-div" v-show="inputTextShow">
+              <div id="input-div" class="input-div test-invisible-input" v-show="inputTextShow">
                 <input id="input-div_input" type="text" ref="input" v-model="inputTextStr" @keyup.enter.exact="sendText" @keyup.esc.exact="closeInput" class="input-div_input"/>
                 <div class="input-div_div">
                     <button @click="sendText" class="input-div_div_button">
@@ -707,6 +733,84 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
       }
     }, 50);
   })();
+</script>
+<script>
+/* CLOUDMOON: native-feeling text input + Recently Played */
+(function () {
+  const boot = () => {
+    const app = document.getElementById('app');
+    if (!app || !app.__vue__) return false;
+    const vm = app.__vue__;
+
+    if (!vm.__cloudmoonLiveInputAttached) {
+      const inputEl = document.getElementById('input-div_input');
+      if (inputEl && typeof vm.sendDataChannelMessage === 'function') {
+        vm.__cloudmoonLiveInputAttached = true;
+        inputEl.addEventListener('input', () => {
+          try {
+            const value = inputEl.value;
+            const count = vm.inputTextCnt++;
+            vm.sendDataChannelMessage('softinput>text_change:' + count + ':0,99999,' + value);
+          } catch (error) {
+            console.error('[CloudMoon] Live text input failed:', error);
+          }
+        });
+      }
+    }
+
+    if (!vm.__cloudmoonRecentLoaded && typeof vm.customFetch === 'function') {
+      vm.__cloudmoonRecentLoaded = true;
+      vm.$set(vm, 'recentGamesLoading', true);
+
+      const unwrap = res => res && res.data !== undefined ? res.data : res;
+      const asArray = value => {
+        if (Array.isArray(value)) return value;
+        if (!value || typeof value !== 'object') return [];
+        return value.list || value.items || value.records || value.games || [];
+      };
+      const gameKey = g => g && (g.pkg || g.game_name || g.game || g.game_id || g.id || g.package_name);
+      const normalizeGame = g => {
+        if (!g || typeof g !== 'object') return null;
+        const id = gameKey(g);
+        return {
+          id: id,
+          pkg: id,
+          title: g.title || g.name || g.game_name || g.game_title || String(id || 'Unknown Game'),
+          icon: g.icon || g.icon_url || g.game_icon || 'https://cloudmoonapp.com/favicon.ico',
+          status: g.status === undefined ? 1 : g.status,
+          categories: Array.isArray(g.categories) ? g.categories : [],
+          isHigh: !!(g.isHigh || g.is_high)
+        };
+      };
+
+      vm.customFetch('/game/record').then(response => {
+        const records = asArray(unwrap(response));
+        const nativeGames = Array.isArray(vm.rawGames) ? vm.rawGames : [];
+        const recent = records.map(record => {
+          const key = gameKey(record);
+          return nativeGames.find(g =>
+            String(g.id) === String(key) || String(g.pkg) === String(key)
+          ) || normalizeGame(record);
+        }).filter(Boolean);
+
+        vm.$set(vm, 'recentGames', recent.slice(0, 12));
+        console.log('[CloudMoon] Recently Played loaded:', recent);
+      }).catch(error => {
+        console.error('[CloudMoon] Recently Played failed:', error);
+        vm.$set(vm, 'recentGames', []);
+      }).finally(() => {
+        vm.$set(vm, 'recentGamesLoading', false);
+      });
+    }
+
+    return !!vm.__cloudmoonLiveInputAttached || !!vm.__cloudmoonRecentLoaded;
+  };
+
+  const timer = setInterval(() => {
+    if (boot()) clearInterval(timer);
+  }, 100);
+  setTimeout(() => clearInterval(timer), 15000);
+})();
 </script>
 </body>
 </html>
