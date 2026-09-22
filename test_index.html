@@ -90,6 +90,26 @@
     .input-div_input { display: block; width: 100%; height: 100%; outline: none; border-radius: 1.5rem; padding: 0 6rem 0 1.5rem; font-size: 1.4rem; box-sizing: border-box; position: relative; background: #fff; z-index: 2; opacity: 0.7; color:#000; }
     .input-div_div { position: absolute; width: 6rem; right: 0; bottom: 0; height: 100%; display: flex; justify-content: center; align-items: center; z-index: 3; }
     .input-div_div_button { background-color: #7B6CC4; width: 4rem; height: 1.8rem; border: 0; border-radius: 0.9rem; opacity: 1; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+    /* TEST-ONLY: keep the native text input functional, but make the
+       CloudMoon text-entry overlay completely invisible so typing feels native. */
+    #input-div.test-invisible-input {
+      opacity: 0 !important;
+      background: transparent !important;
+      pointer-events: none !important;
+    }
+    #input-div.test-invisible-input .input-div_input {
+      opacity: 0 !important;
+      background: transparent !important;
+      color: transparent !important;
+      caret-color: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+      pointer-events: none !important;
+    }
+    #input-div.test-invisible-input .input-div_div {
+      display: none !important;
+    }
+
     
     /* Modern Cyber Loading Screen */
     .loading { position: absolute !important; inset: 0 !important; z-index: 1001 !important; background: radial-gradient(circle at center, #1e2831 0%, #0f172a 100%) !important; display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; }
@@ -381,7 +401,7 @@
               </div>
 
               <!-- INPUT-DIV -->
-              <div id="input-div" class="input-div" v-show="inputTextShow">
+              <div id="input-div" class="input-div test-invisible-input" v-show="inputTextShow">
                 <input id="input-div_input" type="text" ref="input" v-model="inputTextStr" @keyup.enter.exact="sendText" @keyup.esc.exact="closeInput" class="input-div_input"/>
                 <div class="input-div_div">
                     <button @click="sendText" class="input-div_div_button">
