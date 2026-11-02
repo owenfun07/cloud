@@ -1309,42 +1309,69 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
 
                 const authFlagKey = a0_0x2d34ce(0x2c0);
                 const originalAuthFlag = vm[authFlagKey];
-                const originalFetch = vm.customFetch;
-                const selected = vm.selectedGame;
-                diag('START: Guest launch diagnostic beginning.', {
-                  game: { title: selected.title, id: selected.id, pkg: selected.pkg, status: selected.status },
-                  apiBase: vm.currentApiHost || 'not yet resolved',
-                  browserTokenPresent: false,
-                  frontendLoginFlagProperty: authFlagKey,
-                  originalFrontendLoginFlag: !!originalAuthFlag,
-                  serverPreference: localStorage.getItem(a0_0x2d34ce(0x2e7)) || '23 (default)'
-                });
-
-                vm.customFetch = async function (path, options = {}) {
-                  const method = (options && options.method) || 'GET';
-                  let requestBody = options && options.body;
-                  try { if (typeof requestBody === 'string') requestBody = JSON.parse(requestBody); } catch (_) {}
-                  diag('API REQUEST', {
-                    path: path,
-                    method: method,
-                    headers: Object.keys((options && options.headers) || {}),
-                    body: requestBody
-                  });
-                  const started = performance.now();
+                const originalWindowFetch = window.fetch;
+                const sanitizeUrl = (rawUrl) => {
                   try {
-                    const response = await originalFetch.call(vm, path, options);
-                    diag('API RESPONSE', {
-                      path: path,
-                      elapsedMs: Math.round(performance.now() - started),
-                      response: response
+                    const url = new URL(rawUrl, location.href);
+                    for (const key of [...url.searchParams.keys()]) {
+                      if (/token|authorization|device_id|android_id|instance_id|user_id|userid|sid|session|cookie|secret/i.test(key)) url.searchParams.set(key, '[REDACTED]');
+                    }
+                    return url.toString();
+                  } catch (_) { return String(rawUrl).slice(0, 2000); }
+                };
+                const headerSnapshot = (headers) => {
+                  const out = {};
+                  try {
+                    new Headers(headers || {}).forEach((value, key) => {
+                      out[key] = /authorization|token|cookie|secret|api-key/i.test(key) ? '[REDACTED]' : value;
                     });
+                  } catch (error) { out._readError = error.message; }
+                  return out;
+                };
+                window.fetch = async function (input, init = {}) {
+                  const requestUrl = typeof input === 'string' ? input : (input && input.url) || String(input);
+                  const method = (init && init.method) || (input && input.method) || 'GET';
+                  let headers = {};
+                  try {
+                    const merged = new Headers(input instanceof Request ? input.headers : {});
+                    new Headers((init && init.headers) || {}).forEach((value, key) => merged.set(key, value));
+                    headers = headerSnapshot(merged);
+                  } catch (error) { headers = { _readError: error.message }; }
+                  let body = init && init.body;
+                  if (typeof body === 'string') {
+                    try { body = JSON.parse(body); } catch (_) { body = body.slice(0, 2000); }
+                  }
+                  const requestId = diagnosticLines.length + 1;
+                  const started = performance.now();
+                  diag('HTTP REQUEST #' + requestId, {
+                    url: sanitizeUrl(requestUrl), method, headers,
+                    body: body === undefined ? undefined : safeValue(body)
+                  });
+                  try {
+                    const response = await originalWindowFetch.apply(this, arguments);
+                    let responseBody = null;
+                    try {
+                      const rawText = await response.clone().text();
+                      try { responseBody = JSON.parse(rawText); }
+                      catch (_) { responseBody = rawText.slice(0, 4000); }
+                    } catch (readError) { responseBody = { readError: readError.message }; }
+                    const responseHeaders = {};
+                    ['content-type','content-length','date','server','www-authenticate','retry-after','x-request-id','cf-ray'].forEach(name => {
+                      const value = response.headers.get(name);
+                      if (value) responseHeaders[name] = value;
+                    });
+                    diag('HTTP RESPONSE #' + requestId, {
+                      url: sanitizeUrl(response.url || requestUrl), status: response.status,
+                      statusText: response.statusText, ok: response.ok,
+                      elapsedMs: Math.round(performance.now() - started),
+                      headers: responseHeaders, body: responseBody
+                    }, response.ok ? 'log' : 'warn');
                     return response;
                   } catch (error) {
-                    diag('API ERROR', {
-                      path: path,
+                    diag('HTTP NETWORK ERROR #' + requestId, {
+                      url: sanitizeUrl(requestUrl), method,
                       elapsedMs: Math.round(performance.now() - started),
-                      name: error && error.name,
-                      message: error && error.message,
+                      name: error && error.name, message: error && error.message,
                       stack: error && error.stack
                     }, 'error');
                     throw error;
@@ -1368,8 +1395,8 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                   }, 'error');
                 } finally {
                   vm[authFlagKey] = originalAuthFlag;
-                  vm.customFetch = originalFetch;
-                  diag('CLEANUP: Restored the original frontend login flag and API function.');
+                  window.fetch = originalWindowFetch;
+                  diag('CLEANUP: Restored the original frontend login flag and browser fetch function.');
                 }
               };
               console.log('[Test Index] Guest launch diagnostic installed. Select a game and use Test Guest Launch.');
