@@ -278,6 +278,58 @@
         line-height: 30px;
       }
 
+      /* Mobile text entry: reveal the native input so a tap can open
+         the on-screen keyboard. Desktop keeps the invisible-input behavior. */
+      #input-div.test-invisible-input {
+        display: block !important;
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        bottom: max(14px, env(safe-area-inset-bottom)) !important;
+        top: auto !important;
+        width: auto !important;
+        height: 48px !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 1005 !important;
+        background: transparent !important;
+      }
+      #input-div.test-invisible-input .input-div_input {
+        display: block !important;
+        width: 100% !important;
+        height: 48px !important;
+        padding: 0 76px 0 14px !important;
+        border: 1px solid rgba(139,92,246,.75) !important;
+        border-radius: 14px !important;
+        background: rgba(15,23,42,.97) !important;
+        color: #fff !important;
+        caret-color: #fff !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        font-size: 16px !important;
+        z-index: 2 !important;
+        touch-action: manipulation;
+        -webkit-user-select: text !important;
+        user-select: text !important;
+      }
+      #input-div.test-invisible-input .input-div_div {
+        display: flex !important;
+        width: 68px !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        height: 48px !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 3 !important;
+      }
+      #input-div.test-invisible-input .input-div_div_button {
+        width: 54px !important;
+        height: 36px !important;
+        border-radius: 11px !important;
+        touch-action: manipulation;
+      }
+
       /* Better touch interaction and safe-area handling. */
       button, .control-box, [@click] {
         touch-action: manipulation;
