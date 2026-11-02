@@ -724,7 +724,7 @@
              Play Now
           </button>
 
-          <button @click="runGuestLaunchDiagnostic" class="w-full py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl border border-emerald-400/20 transition-all flex items-center justify-center gap-2">
+          <button onclick="window.runGuestLaunchDiagnostic && window.runGuestLaunchDiagnostic()" class="w-full py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl border border-emerald-400/20 transition-all flex items-center justify-center gap-2">
             <i data-lucide="flask-conical" class="w-4 h-4"></i>
             Test Guest Launch (diagnostic)
           </button>
@@ -1292,7 +1292,7 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                   window.prompt('Copy the diagnostic log below:', text);
                 }
               };
-              vm.$set(vm, 'runGuestLaunchDiagnostic', async function () {
+              window.runGuestLaunchDiagnostic = async function () {
                 if (!vm.selectedGame) {
                   diag('STOP: No game is selected.', null, 'warn');
                   return;
@@ -1371,7 +1371,7 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
                   vm.customFetch = originalFetch;
                   diag('CLEANUP: Restored the original frontend login flag and API function.');
                 }
-              });
+              };
               console.log('[Test Index] Guest launch diagnostic installed. Select a game and use Test Guest Launch.');
             }
 
