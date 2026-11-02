@@ -278,10 +278,12 @@
         line-height: 30px;
       }
 
-      /* Mobile text entry: reveal the native input so a tap can open
-         the on-screen keyboard. Desktop keeps the invisible-input behavior. */
+      /* Phone text-entry prompt. Do not force display on: Vue's v-show
+         must remain in control so this appears only when the game requests text. */
       #input-div.test-invisible-input {
-        display: block !important;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         position: fixed !important;
         left: 12px !important;
         right: 12px !important;
@@ -297,9 +299,11 @@
       }
       #input-div.test-invisible-input .input-div_input {
         display: block !important;
-        width: 100% !important;
+        flex: 1 1 auto;
+        min-width: 0;
+        width: 0 !important;
         height: 48px !important;
-        padding: 0 76px 0 14px !important;
+        padding: 0 14px !important;
         border: 1px solid rgba(139,92,246,.75) !important;
         border-radius: 14px !important;
         background: rgba(15,23,42,.97) !important;
@@ -314,20 +318,28 @@
         user-select: text !important;
       }
       #input-div.test-invisible-input .input-div_div {
+        position: static !important;
         display: flex !important;
+        flex: 0 0 68px;
         width: 68px !important;
-        right: 0 !important;
-        bottom: 0 !important;
         height: 48px !important;
         opacity: 1 !important;
         pointer-events: auto !important;
         z-index: 3 !important;
       }
       #input-div.test-invisible-input .input-div_div_button {
-        width: 54px !important;
-        height: 36px !important;
-        border-radius: 11px !important;
+        width: 68px !important;
+        height: 48px !important;
+        border-radius: 14px !important;
         touch-action: manipulation;
+      }
+
+      /* These are desktop keyboard/hotkey overlays, not phone touch controls. */
+      #keyboard,
+      #keyboard .keyboard-key,
+      #keyboard .keyboard-lock,
+      #keyboard .l-rocker {
+        display: none !important;
       }
 
       /* Better touch interaction and safe-area handling. */
