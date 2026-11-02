@@ -139,6 +139,188 @@
     .video { max-width: none !important; max-height: none !important; }
     .rotate { transform: rotate(90deg); transform-origin: 28.13% 50%; }
     #canvasCoc { width: 100%; height: 100%; position: absolute; top: 0; left: 0; z-index: 899; }
+
+    
+    /* MOBILE-FIRST RESPONSIVE OVERRIDES — test_index.html only */
+    html, body, #app { width: 100%; min-width: 0; }
+    @supports (height: 100dvh) {
+      .layout-wrapper { height: 100dvh; }
+      .sidebar-left, .main-right { height: 100dvh; }
+    }
+
+    @media (max-width: 767px) {
+      html { scrollbar-gutter: auto; }
+      body { overflow: hidden; overscroll-behavior: none; }
+      .layout-wrapper {
+        width: 100%;
+        height: 100vh;
+        height: 100dvh;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      /* Browsing layout */
+      .main-right {
+        width: 100% !important;
+        min-width: 0;
+        height: 100%;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch;
+      }
+      .main-right nav {
+        position: sticky;
+        top: 0;
+        padding: max(10px, env(safe-area-inset-top)) 12px 12px;
+        gap: 10px;
+        align-items: stretch;
+      }
+      .main-right nav > div:first-child {
+        min-height: 38px;
+      }
+      .main-right nav .font-black.text-xl {
+        font-size: 19px;
+      }
+      .main-right nav input[type="text"] {
+        min-height: 42px;
+        font-size: 16px;
+      }
+      .main-right > div:last-child {
+        padding: 14px 12px calc(24px + env(safe-area-inset-bottom));
+      }
+      .main-right .grid.grid-cols-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 10px !important;
+      }
+      .main-right .grid.grid-cols-3 > div {
+        border-radius: 13px;
+      }
+      .main-right section h2 {
+        font-size: 16px;
+      }
+      .main-right section .w-48 {
+        width: 150px;
+        height: 92px;
+      }
+      .main-right .flex.items-center.gap-2.overflow-x-auto {
+        gap: 7px;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .main-right .flex.items-center.gap-2.overflow-x-auto button {
+        padding: 8px 13px;
+        font-size: 10px;
+      }
+
+      /* In-game controls become a compact slide-over panel. */
+      #main-sidebar-container {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: min(88vw, 340px) !important;
+        max-width: 340px;
+        height: 100vh !important;
+        height: 100dvh !important;
+        z-index: 1000 !important;
+        box-shadow: 12px 0 35px rgba(0,0,0,.55);
+      }
+      #main-sidebar-container.w-0 {
+        width: 0 !important;
+      }
+      #main-sidebar-container .p-6 {
+        padding: 14px;
+      }
+      #main-sidebar-container .control-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        margin-top: 12px;
+      }
+      #main-sidebar-container .control-box {
+        min-height: 76px;
+        padding: 10px 6px;
+        gap: 6px;
+      }
+      #sidebar-toggle-btn {
+        left: auto !important;
+        right: 10px !important;
+        top: calc(env(safe-area-inset-top) + 12px) !important;
+        transform: none !important;
+        z-index: 1002 !important;
+        padding: 9px;
+        background: rgba(30,40,49,.94);
+      }
+      #playing-state {
+        width: 100%;
+        height: 100%;
+        min-width: 0;
+      }
+      #playing-state .container,
+      #playing-state .game,
+      #run-content-wrapper,
+      #video-wrapper {
+        max-width: 100vw;
+      }
+      .container.has-a-div {
+        padding: 0 !important;
+      }
+      .container.hide-vertical {
+        padding: 0 !important;
+      }
+      .keyboard-key {
+        font-size: 11px;
+      }
+      .keyboard-lock {
+        top: max(8px, env(safe-area-inset-top));
+        font-size: 10px;
+        height: 30px;
+        line-height: 30px;
+      }
+
+      /* Better touch interaction and safe-area handling. */
+      button, .control-box, [@click] {
+        touch-action: manipulation;
+      }
+      #custom-dev-console-panel {
+        height: min(45dvh, 280px);
+        padding: 10px;
+        padding-bottom: max(10px, env(safe-area-inset-bottom));
+        font-size: 10px;
+      }
+      #custom-dev-console-panel pre {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .main-right .grid.grid-cols-3 {
+        gap: 8px !important;
+      }
+      .main-right > div:last-child {
+        padding-left: 9px;
+        padding-right: 9px;
+      }
+      .main-right section .w-48 {
+        width: 136px;
+        height: 84px;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 500px) {
+      .main-right nav {
+        padding-top: max(6px, env(safe-area-inset-top));
+        padding-bottom: 7px;
+        gap: 7px;
+      }
+      #main-sidebar-container .p-6 {
+        padding: 9px;
+      }
+      #main-sidebar-container .control-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
   </style>
 </head>
 <body oncontextmenu="return false;">
