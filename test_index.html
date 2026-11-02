@@ -724,6 +724,12 @@
              Play Now
           </button>
 
+          <button @click="runGuestLaunchDiagnostic" class="w-full py-3 bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl border border-emerald-400/20 transition-all flex items-center justify-center gap-2">
+            <i data-lucide="flask-conical" class="w-4 h-4"></i>
+            Test Guest Launch (diagnostic)
+          </button>
+          <p class="text-[10px] text-gray-400 text-center">Test-only: attempts the real device and game connection without a login token. Results are recorded in the developer console.</p>
+
         </div>
     </div>
 
@@ -807,6 +813,7 @@
           <i data-lucide="terminal" class="w-4 h-4"></i> CloudMoon Dev Console & Inspector
         </span>
         <div class="flex gap-2">
+          <button onclick="window.copyGuestLaunchLogs()" class="px-2 py-1 bg-emerald-700/40 hover:bg-emerald-700/60 text-emerald-200 rounded border border-emerald-500/20 transition">Copy Logs</button>
           <button onclick="window.clearDevConsoleLogs()" class="px-2 py-1 bg-white/5 hover:bg-white/10 text-gray-300 rounded border border-white/5 transition">Clear Logs</button>
           <button onclick="document.getElementById('custom-dev-console-panel').style.display='none'" class="px-2 py-1 bg-red-500/20 hover:bg-red-500/30 text-red-400 rounded border border-red-500/10 transition">Close</button>
         </div>
@@ -1243,6 +1250,130 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
             // category raised a template ReferenceError and effectively did
             // nothing. Expose the bridge function directly on vm.
             vm.$set(vm, 'filterTestCategory', filterTestCategory);
+
+            // GUEST-LAUNCH DIAGNOSTIC (test_index.html only).
+            // This temporarily bypasses only the frontend login check, while
+            // deliberately leaving the API request unauthenticated.
+            if (!vm.__guestLaunchDiagnosticInstalled) {
+              vm.__guestLaunchDiagnosticInstalled = true;
+              const diagnosticLines = [];
+              const safeValue = (value, depth = 0) => {
+                if (depth > 5) return '[depth limit]';
+                if (value === null || value === undefined) return value;
+                if (typeof value === 'string') return value.length > 4000 ? value.slice(0, 4000) + '…[truncated]' : value;
+                if (Array.isArray(value)) return value.slice(0, 30).map(v => safeValue(v, depth + 1));
+                if (typeof value === 'object') {
+                  const out = {};
+                  Object.keys(value).slice(0, 80).forEach(key => {
+                    if (/token|authorization|password|secret|cookie|android_id|android_instance_id|device_id|user_id|userid/i.test(key)) {
+                      const v = value[key];
+                      out[key] = v ? '[present, redacted]' : v;
+                    } else {
+                      out[key] = safeValue(value[key], depth + 1);
+                    }
+                  });
+                  return out;
+                }
+                return value;
+              };
+              const diag = (label, data, level = 'log') => {
+                const line = '[' + new Date().toISOString() + '] ' + label +
+                  (data === undefined ? '' : ' ' + JSON.stringify(safeValue(data)));
+                diagnosticLines.push(line);
+                if (diagnosticLines.length > 500) diagnosticLines.shift();
+                (console[level] || console.log).call(console, '[Guest Launch Test] ' + line);
+              };
+              window.copyGuestLaunchLogs = async () => {
+                const text = diagnosticLines.join('\n') || 'No guest-launch diagnostic has been run yet.';
+                try {
+                  await navigator.clipboard.writeText(text);
+                  console.log('[Guest Launch Test] Diagnostic log copied to clipboard.');
+                } catch (error) {
+                  window.prompt('Copy the diagnostic log below:', text);
+                }
+              };
+              vm.$set(vm, 'runGuestLaunchDiagnostic', async function () {
+                if (!vm.selectedGame) {
+                  diag('STOP: No game is selected.', null, 'warn');
+                  return;
+                }
+                const tokenKey = a0_0x2d34ce(0x16e);
+                const token = localStorage.getItem(tokenKey);
+                if (token) {
+                  diag('STOP: A user token is present. Sign out first so this is a genuine guest test. Token value was not recorded.', {
+                    tokenStorageKey: tokenKey,
+                    tokenPresent: true
+                  }, 'warn');
+                  return;
+                }
+
+                const authFlagKey = a0_0x2d34ce(0x2c0);
+                const originalAuthFlag = vm[authFlagKey];
+                const originalFetch = vm.customFetch;
+                const selected = vm.selectedGame;
+                diag('START: Guest launch diagnostic beginning.', {
+                  game: { title: selected.title, id: selected.id, pkg: selected.pkg, status: selected.status },
+                  apiBase: vm.currentApiHost || 'not yet resolved',
+                  browserTokenPresent: false,
+                  frontendLoginFlagProperty: authFlagKey,
+                  originalFrontendLoginFlag: !!originalAuthFlag,
+                  serverPreference: localStorage.getItem(a0_0x2d34ce(0x2e7)) || '23 (default)'
+                });
+
+                vm.customFetch = async function (path, options = {}) {
+                  const method = (options && options.method) || 'GET';
+                  let requestBody = options && options.body;
+                  try { if (typeof requestBody === 'string') requestBody = JSON.parse(requestBody); } catch (_) {}
+                  diag('API REQUEST', {
+                    path: path,
+                    method: method,
+                    headers: Object.keys((options && options.headers) || {}),
+                    body: requestBody
+                  });
+                  const started = performance.now();
+                  try {
+                    const response = await originalFetch.call(vm, path, options);
+                    diag('API RESPONSE', {
+                      path: path,
+                      elapsedMs: Math.round(performance.now() - started),
+                      response: response
+                    });
+                    return response;
+                  } catch (error) {
+                    diag('API ERROR', {
+                      path: path,
+                      elapsedMs: Math.round(performance.now() - started),
+                      name: error && error.name,
+                      message: error && error.message,
+                      stack: error && error.stack
+                    }, 'error');
+                    throw error;
+                  }
+                };
+
+                try {
+                  // The native launch method exits early when the frontend
+                  // login flag is false. Temporarily set that flag so its
+                  // original /phone/list -> /phone/connect -> streaming flow
+                  // runs unchanged. customFetch still has no X-User-Token.
+                  vm[authFlagKey] = true;
+                  diag('BYPASS: Temporarily enabled the frontend-only login flag. No account token was added.');
+                  await vm.startGameInAio();
+                  diag('FINISH: Native launch method returned. Check the API response and player logs above.');
+                } catch (error) {
+                  diag('UNCAUGHT LAUNCH ERROR', {
+                    name: error && error.name,
+                    message: error && error.message,
+                    stack: error && error.stack
+                  }, 'error');
+                } finally {
+                  vm[authFlagKey] = originalAuthFlag;
+                  vm.customFetch = originalFetch;
+                  diag('CLEANUP: Restored the original frontend login flag and API function.');
+                }
+              });
+              console.log('[Test Index] Guest launch diagnostic installed. Select a game and use Test Guest Launch.');
+            }
 
             console.log('[Test Index] Category filter handler attached to Vue instance.');
             // TEST-ONLY LIVE REMOTE TEXT INPUT
