@@ -1,0 +1,61 @@
+name: Refresh CloudMoon catalog
+
+on:
+  schedule:
+    - cron: "23 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Fetch and validate CloudMoon catalog
+        run: |
+          set -euo pipefail
+          mkdir -p game-list
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 5 \
+            -H "Accept: application/json" \
+            "https://api.prod.cloudmoonapp.com/game/simple_list" \
+            -o /tmp/cloudmoon-response.json
+
+          python3 - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          source = Path("/tmp/cloudmoon-response.json")
+          data = json.loads(source.read_text(encoding="utf-8"))
+          if data.get("code") != 0:
+              raise SystemExit("CloudMoon API returned a non-zero code; keeping the previous catalog.")
+          games = data.get("data", {}).get("list")
+          if not isinstance(games, list) or not games:
+              raise SystemExit("CloudMoon API returned no valid game list; keeping the previous catalog.")
+          required = ("package_name", "title")
+          if any(not isinstance(game, dict) or any(not game.get(k) for k in required) for game in games):
+              raise SystemExit("Catalog validation failed; keeping the previous catalog.")
+          data["_catalog_updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+          Path("game-list/games.json").write_text(
+              json.dumps(data, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8"
+          )
+          print(f"Validated and saved {len(games)} catalog entries.")
+          PY
+
+      - name: Commit catalog if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add game-list/games.json
+          if git diff --cached --quiet; then
+            echo "Catalog unchanged; no commit needed."
+          else
+            git commit -m "Refresh CloudMoon game catalog"
+            git push
+          fi
