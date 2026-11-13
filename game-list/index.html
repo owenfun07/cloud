@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CloudMoon Game Directory</title>
+<style>
+:root{color-scheme:dark;--bg:#090d18;--panel:#121a2b;--panel2:#19243a;--line:#293650;--muted:#9aa9c2;--text:#f4f7ff;--accent:#8b9cff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172444 0,#090d18 55%);color:var(--text);font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
+header{padding:38px 20px 25px;text-align:center}h1{font-size:clamp(30px,5vw,48px);line-height:1.1;margin:0 0 10px;letter-spacing:-1.5px}header p{color:var(--muted);margin:0}
+main{max-width:1180px;margin:auto;padding:0 18px 60px}.toolbar{position:sticky;top:0;z-index:5;background:#0b1020ed;backdrop-filter:blur(14px);padding:14px 0;border-bottom:1px solid var(--line)}
+input,select,button{font:inherit;border:1px solid var(--line);border-radius:11px;background:var(--panel);color:var(--text);padding:11px 13px}input{width:100%;min-width:0}.filters{display:grid;grid-template-columns:minmax(180px,1fr) minmax(160px,220px) auto;gap:10px}
+button{cursor:pointer;white-space:nowrap}button:hover{background:var(--panel2);border-color:#6074a5}.meta{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:13px;margin:13px 2px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:13px;margin-top:17px}.game{background:linear-gradient(145deg,#172238,#101827);border:1px solid var(--line);border-radius:15px;padding:13px;min-width:0}
+.gamehead{display:flex;align-items:center;gap:12px;min-width:0}.game img{width:54px;height:54px;object-fit:cover;border-radius:12px;background:#25314a}.name{font-weight:700;overflow-wrap:anywhere}.pkg{font-size:11px;color:var(--muted);overflow-wrap:anywhere;margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:11px 0}.tag{font-size:10px;padding:3px 7px;border-radius:20px;background:#27344e;color:#c7d4ef}
+.actions{display:flex;gap:7px;flex-wrap:wrap}.actions button{font-size:12px;padding:7px 9px}.actions .primary{background:#394c91;border-color:#566cc0}
+a{color:#b9c6ff}.footer{margin-top:28px;text-align:center;color:var(--muted);font-size:13px}.empty{text-align:center;color:var(--muted);padding:45px 12px;grid-column:1/-1}
+@media(max-width:620px){.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.filters button{width:100%}}
+</style>
+</head>
+<body>
+<header><h1>CloudMoon Game Directory</h1><p>Browse the CloudMoon catalog and create links for the embedded player.</p></header>
+<main>
+<section class="toolbar"><div class="filters">
+<input id="search" type="search" placeholder="Search games or package names…" autocomplete="off">
+<select id="category"><option value="">All categories</option></select>
+<button id="clear">Clear filters</button>
+</div><div class="meta"><span id="count">Loading catalog…</span><span id="updated"></span></div></section>
+<section id="games" class="grid" aria-live="polite"></section>
+<div class="footer">Catalog data is refreshed weekly from CloudMoon. <a href="./games.json">Raw JSON API</a> · <a href="../">CloudMoon home</a></div>
+</main>
+<script>
+const EMBED_BASE=new URL('../embed/',location.href).href;
+const $=id=>document.getElementById(id);
+let allGames=[];
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function embedUrl(pkg){return EMBED_BASE+'?game='+encodeURIComponent(pkg);}
+async function copy(text,button){try{await navigator.clipboard.writeText(text);const old=button.textContent;button.textContent='Copied!';setTimeout(()=>button.textContent=old,1300)}catch(e){prompt('Copy this:',text)}}
+function render(){
+ const q=$('search').value.trim().toLowerCase(),cat=$('category').value;
+ const games=allGames.filter(g=>(!cat||(g.categories||[]).includes(cat))&&(!q||[g.title,g.package_name,...(g.categories||[])].join(' ').toLowerCase().includes(q))).sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+ $('count').textContent=games.length.toLocaleString()+' of '+allGames.length.toLocaleString()+' entries';
+ $('games').innerHTML=games.length?games.map(g=>{const pkg=g.package_name||'';return '<article class="game"><div class="gamehead">'+(g.icon_url?'<img loading="lazy" src="'+esc(g.icon_url)+'" alt="">':'<div class="game img"></div>')+'<div style="min-width:0"><div class="name">'+esc(g.title||pkg)+'</div><div class="pkg">'+esc(pkg)+'</div></div></div><div class="tags">'+(g.categories||[]).slice(0,5).map(c=>'<span class="tag">'+esc(c)+'</span>').join('')+'</div><div class="actions"><button class="primary" data-url="'+esc(embedUrl(pkg))+'">Open player</button><button data-copy="'+esc(pkg)+'">Copy package</button><button data-embed="'+esc(pkg)+'">Copy iframe</button></div></article>'}).join(''):'<div class="empty">No matching games found.</div>';
+ $('games').querySelectorAll('[data-copy]').forEach(b=>b.onclick=()=>copy(b.dataset.copy,b));
+ $('games').querySelectorAll('[data-url]').forEach(b=>b.onclick=()=>window.open(b.dataset.url,'_blank','noopener'));
+ $('games').querySelectorAll('[data-embed]').forEach(b=>b.onclick=()=>copy('<iframe src="'+embedUrl(b.dataset.embed)+'" width="100%" height="600" allow="fullscreen; autoplay" allowfullscreen></iframe>',b));
+}
+async function load(){
+ try{const r=await fetch('./games.json',{cache:'no-store'});if(!r.ok)throw Error('Catalog has not been published yet.');const data=await r.json();if(data.code!==0||!Array.isArray(data.data?.list))throw Error('The catalog response has an unexpected format.');allGames=data.data.list.filter(g=>g&&g.package_name);const cats=[...new Set(allGames.flatMap(g=>g.categories||[]))].sort();$('category').innerHTML='<option value="">All categories</option>'+cats.map(c=>'<option value="'+esc(c)+'">'+esc(c.replaceAll('_',' '))+'</option>').join('');$('updated').textContent='Source: CloudMoon · '+(data._catalog_updated||'');render()}
+ catch(e){$('count').textContent='Catalog unavailable';$('games').innerHTML='<div class="empty">'+esc(e.message)+'<br>Run the “Refresh CloudMoon catalog” workflow in GitHub Actions to create the first snapshot.</div>'}
+}
+$('search').addEventListener('input',render);$('category').addEventListener('change',render);$('clear').onclick=()=>{$('search').value='';$('category').value='';render()};load();
+</script>
+</body></html>
