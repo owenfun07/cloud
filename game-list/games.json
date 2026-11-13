@@ -1,6 +1,2859 @@
 {
   "code": 0,
   "data": {
-    "list": []
-  }
+    "list": [
+      {
+        "id": 22,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.roblox.client_20261103.webp",
+        "package_name": "com.roblox.client",
+        "title": "Roblox",
+        "categories": [
+          "simulation",
+          "casual",
+          "sandbox",
+          "minecraft",
+          "roblox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 88,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.supercell.clashroyale_20261103.webp",
+        "package_name": "com.supercell.clashroyale",
+        "title": "Clash Royale",
+        "categories": [
+          "strategy",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1320,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.android.chrome_20261103.webp",
+        "package_name": "com.android.chrome",
+        "title": "Google Chrome",
+        "categories": [
+          "apps",
+          "communication"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 65,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.supercell.brawlstars_20261103.webp",
+        "package_name": "com.supercell.brawlstars",
+        "title": "Brawl Stars",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1331,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.zhiliaoapp.musically_20261103.webp",
+        "package_name": "com.zhiliaoapp.musically",
+        "title": "TikTok",
+        "categories": [
+          "apps",
+          "social"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1335,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.google.android.youtube_20261103.webp",
+        "package_name": "com.google.android.youtube",
+        "title": "YouTube",
+        "categories": [
+          "apps",
+          "video_players_&_editors"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1381,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.instagram.android_20261103.webp",
+        "package_name": "com.instagram.android",
+        "title": "Instagram",
+        "categories": [
+          "apps"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 59,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.epicgames.fortnite_20261103.webp",
+        "package_name": "com.epicgames.fortnite",
+        "title": "Fortnite",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter",
+          "fortnite"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 58,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ea.gp.fifamobile_20261103.webp",
+        "package_name": "com.ea.gp.fifamobile",
+        "title": "EA SPORTS FC Soccer Mobile 27",
+        "categories": [
+          "sports&racing",
+          "sports",
+          "soccer"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1339,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.discord_20261103.webp",
+        "package_name": "com.discord",
+        "title": "Discord - Talk, Play, Hang Out",
+        "categories": [
+          "apps",
+          "communication"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1306,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/ai.socialapps.speakmaster_20261103.webp",
+        "package_name": "ai.socialapps.speakmaster",
+        "title": "PolyBuzz: Chat with AI Friends",
+        "categories": [
+          "apps",
+          "entertainment",
+          "chat_ai"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 35,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.konami.pesam_20261103.webp",
+        "package_name": "jp.konami.pesam",
+        "title": "eFootball™",
+        "categories": [
+          "sports&racing",
+          "sports",
+          "soccer"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 47,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.devsisters.ck_20261103.webp",
+        "package_name": "com.devsisters.ck",
+        "title": "CookieRun: Kingdom",
+        "categories": [
+          "rpg",
+          "strategy",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 86,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.innersloth.spacemafia_20261103.webp",
+        "package_name": "com.innersloth.spacemafia",
+        "title": "Among Us",
+        "categories": [
+          "strategy",
+          "asymmetrical_battle_arena"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1308,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ea.gp.maddennfl21mobile_20261103.webp",
+        "package_name": "com.ea.gp.maddennfl21mobile",
+        "title": "Madden NFL 27 Mobile Football",
+        "categories": [
+          "sports&racing",
+          "sports",
+          "casual",
+          "american_football"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miHoYo.GenshinImpact_20261103.webp",
+        "package_name": "com.miHoYo.GenshinImpact",
+        "title": "Genshin Impact 6th Anniversary",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 56,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.supercell.clashofclans_20261103.webp",
+        "package_name": "com.supercell.clashofclans",
+        "title": "Clash of Clans",
+        "categories": [
+          "strategy",
+          "casual",
+          "build_&_battle"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1325,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ProjectMoon.LimbusCompany_20261103.webp",
+        "package_name": "com.ProjectMoon.LimbusCompany",
+        "title": "Limbus Company",
+        "categories": [
+          "rpg",
+          "strategy",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 6,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.mobile.legends_20261103.webp",
+        "package_name": "com.mobile.legends",
+        "title": "Mobile Legends: Bang Bang",
+        "categories": [
+          "strategy",
+          "moba"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1297,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.weaver.app.prod_20261103.webp",
+        "package_name": "com.weaver.app.prod",
+        "title": "Talkie: Creative AI Community",
+        "categories": [
+          "apps",
+          "entertainment",
+          "chat_ai"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 49,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dts.freefireth_20261103.webp",
+        "package_name": "com.dts.freefireth",
+        "title": "Free Fire x NARUTO SHIPPUDEN",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1174,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.pokemon.pokemontcgp_20261103.webp",
+        "package_name": "jp.pokemon.pokemontcgp",
+        "title": "Pokémon TCG Pocket",
+        "categories": [
+          "casual",
+          "card",
+          "card_battler"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1106,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/me.zepeto.main_20261103.webp",
+        "package_name": "me.zepeto.main",
+        "title": "ZEPETO: Avatar, Connect & Live",
+        "categories": [
+          "apps",
+          "entertainment",
+          "chat_ai"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1349,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.spotify.music_20261103.webp",
+        "package_name": "com.spotify.music",
+        "title": "Spotify: Music and Podcasts",
+        "categories": [
+          "apps",
+          "music_&_audio"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 3,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.HoYoverse.hkrpgoversea_20261103.webp",
+        "package_name": "com.HoYoverse.hkrpgoversea",
+        "title": "Honkai: Star Rail",
+        "categories": [
+          "anime",
+          "rpg",
+          "role_playing",
+          "turn-based_rpg",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1274,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.cygames.umamusume_20261103.webp",
+        "package_name": "com.cygames.umamusume",
+        "title": "Umamusume: Pretty Derby",
+        "categories": [
+          "simulation",
+          "anime",
+          "life"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1299,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.block.juggle_20261103.webp",
+        "package_name": "com.block.juggle",
+        "title": "Block Blast!",
+        "categories": [
+          "casual",
+          "puzzle",
+          "block"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1329,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.Level5.YWP_20261103.webp",
+        "package_name": "com.Level5.YWP",
+        "title": "妖怪ウォッチ ぷにぷに",
+        "categories": [
+          "anime",
+          "casual",
+          "puzzle",
+          "match_3",
+          "match_3_adventure",
+          "hypercasual",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 101,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.dblegends_ww_20261103.webp",
+        "package_name": "com.bandainamcoent.dblegends_ww",
+        "title": "DRAGON BALL LEGENDS",
+        "categories": [
+          "rpg",
+          "anime",
+          "action",
+          "strategy",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1316,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.robtopx.geometryjumplite_20261103.webp",
+        "package_name": "com.robtopx.geometryjumplite",
+        "title": "Geometry Dash Lite",
+        "categories": [
+          "action",
+          "casual",
+          "platformer",
+          "runner",
+          "arcade"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1372,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dxx.firenow_20261103.webp",
+        "package_name": "com.dxx.firenow",
+        "title": "Survivor.io",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "roguelike"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 68,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dts.freefiremax_20261103.webp",
+        "package_name": "com.dts.freefiremax",
+        "title": "Free Fire MAX x NARUTO",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 50,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.tencent.ig_20261103.webp",
+        "package_name": "com.tencent.ig",
+        "title": "PUBG MOBILE",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1089,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.HoYoverse.Nap_20261103.webp",
+        "package_name": "com.HoYoverse.Nap",
+        "title": "Zenless Zone Zero",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1313,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/ai.character.app_20261103.webp",
+        "package_name": "ai.character.app",
+        "title": "Character AI: Chat, Talk, Text",
+        "categories": [
+          "apps",
+          "entertainment",
+          "chat_ai"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 87,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.papegames.lysk.en_20261103.webp",
+        "package_name": "com.papegames.lysk.en",
+        "title": "Love and Deepspace",
+        "categories": [
+          "simulation",
+          "casual",
+          "life",
+          "dating"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1317,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.konami.prospia_20261103.webp",
+        "package_name": "jp.konami.prospia",
+        "title": "プロ野球スピリッツA",
+        "categories": [
+          "sports&racing",
+          "sports",
+          "baseball"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1411,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Granny_two.webp",
+        "package_name": "com.dvloper.grannychaptertwo",
+        "title": "Granny: Chapter Two",
+        "categories": [
+          "action",
+          "action-adventure",
+          "single_player",
+          "survival_horror",
+          "survival"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1309,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/us.kr.baseballnine_20261103.webp",
+        "package_name": "us.kr.baseballnine",
+        "title": "BASEBALL 9",
+        "categories": [
+          "casual",
+          "sports&racing",
+          "sports",
+          "baseball"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1088,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.kurogame.wutheringwaves.global_20261103.webp",
+        "package_name": "com.kurogame.wutheringwaves.global",
+        "title": "Wuthering Waves",
+        "categories": [
+          "rpg",
+          "anime",
+          "action",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 92,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.activision.callofduty.shooter_20261103.webp",
+        "package_name": "com.activision.callofduty.shooter",
+        "title": "Call of Duty®: Mobile",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1390,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.scatterlab.messenger_20261103.webp",
+        "package_name": "com.scatterlab.messenger",
+        "title": "zeta: AI Chat, Story, Play",
+        "categories": [
+          "apps"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1351,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.openai.chatgpt_20261103.webp",
+        "package_name": "com.openai.chatgpt",
+        "title": "ChatGPT",
+        "categories": [
+          "apps",
+          "productivity"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1158,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Rocket_League_Sideswipe.webp",
+        "package_name": "com.Psyonix.RL2D",
+        "title": "Rocket League Sideswipe",
+        "categories": [
+          "sports&racing",
+          "sports",
+          "casual",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 73,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.levelinfinite.sgameGlobal_20261103.webp",
+        "package_name": "com.levelinfinite.sgameGlobal",
+        "title": "Honor of Kings",
+        "categories": [
+          "strategy",
+          "moba",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1303,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.co.ponos.battlecatsen_20261103.webp",
+        "package_name": "jp.co.ponos.battlecatsen",
+        "title": "The Battle Cats",
+        "categories": [
+          "strategy",
+          "casual",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1279,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.aniplex.twst.en_20261103.webp",
+        "package_name": "com.aniplex.twst.en",
+        "title": "Disney Twisted-Wonderland",
+        "categories": [
+          "rpg",
+          "casual",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1305,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.co.ponos.battlecats_20261103.webp",
+        "package_name": "jp.co.ponos.battlecats",
+        "title": "にゃんこ大戦争",
+        "categories": [
+          "strategy",
+          "casual",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1239,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.proxima.dfm_20261103.webp",
+        "package_name": "com.proxima.dfm",
+        "title": "Delta Force: 2nd Anniversary",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1366,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.hottagames.nte_20261103.webp",
+        "package_name": "com.hottagames.nte",
+        "title": "NTE: Neverness to Everness",
+        "categories": [
+          "rpg",
+          "anime",
+          "action",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 41,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.proximabeta.nikke_20261103.webp",
+        "package_name": "com.proximabeta.nikke",
+        "title": "GODDESS OF VICTORY: NIKKE",
+        "categories": [
+          "action",
+          "rpg",
+          "anime",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 98,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.gaijingames.wtm_20261103.webp",
+        "package_name": "com.gaijingames.wtm",
+        "title": "War Thunder Mobile",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1171,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.olzhas.carparking.multyplayer_20261103.webp",
+        "package_name": "com.olzhas.carparking.multyplayer",
+        "title": "Car Parking Multiplayer",
+        "categories": [
+          "simulation",
+          "casual",
+          "vehicle",
+          "parking_simulator"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1394,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miniclip.plagueinc_20261103.webp",
+        "package_name": "com.miniclip.plagueinc",
+        "title": "Plague Inc.",
+        "categories": [
+          "simulation",
+          "casual",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1370,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pinterest_20261103.webp",
+        "package_name": "com.pinterest",
+        "title": "Pinterest",
+        "categories": [
+          "apps",
+          "lifestyle"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1298,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.kiloo.subwaysurf_20261103.webp",
+        "package_name": "com.kiloo.subwaysurf",
+        "title": "Subway Surfers",
+        "categories": [
+          "action",
+          "platformer",
+          "runner",
+          "arcade"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1322,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.yysls_20261103.webp",
+        "package_name": "com.netease.yysls",
+        "title": "Where Winds Meet",
+        "categories": [
+          "rpg",
+          "action",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1319,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/air.com.lunime.gachalife_20261103.webp",
+        "package_name": "air.com.lunime.gachalife",
+        "title": "Gacha Life",
+        "categories": [
+          "simulation",
+          "anime",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1307,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dvloper.granny_20261103.webp",
+        "package_name": "com.dvloper.granny",
+        "title": "Granny",
+        "categories": [
+          "action",
+          "action-adventure",
+          "survival_horror",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1398,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.x.aniimos_20261103.webp",
+        "package_name": "com.x.aniimos",
+        "title": "Aniimo",
+        "categories": [
+          "rpg",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1336,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_MojoLauncher.webp",
+        "package_name": "git.artdeell.mojo",
+        "title": "MojoLauncher for Minecraft",
+        "categories": [
+          "simulation",
+          "tools",
+          "sandbox",
+          "minecraft"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1408,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pazugames.avatarworld_20261103.webp",
+        "package_name": "com.pazugames.avatarworld",
+        "title": "Avatar World ®",
+        "categories": [
+          "simulation",
+          "casual",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1397,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pixonic.wwr_20261103.webp",
+        "package_name": "com.pixonic.wwr",
+        "title": "War Robots Multiplayer Battles",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1352,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bigbluebubble.singingmonsters.full_20261103.webp",
+        "package_name": "com.bigbluebubble.singingmonsters.full",
+        "title": "My Singing Monsters",
+        "categories": [
+          "simulation",
+          "breeding",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1358,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.opbrjp_20261103.webp",
+        "package_name": "com.bandainamcoent.opbrjp",
+        "title": "ONE PIECE バウンティラッシュ - アクションゲーム",
+        "categories": [
+          "action",
+          "anime",
+          "fighting"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1302,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ea.game.pvzfree_row_20261103.webp",
+        "package_name": "com.ea.game.pvzfree_row",
+        "title": "Plants vs. Zombies™",
+        "categories": [
+          "strategy",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1321,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.studio27.MelonPlayground_20261103.webp",
+        "package_name": "com.studio27.MelonPlayground",
+        "title": "Melon Sandbox x Poppy Playtime",
+        "categories": [
+          "simulation",
+          "sandbox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1375,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.mojang.minecraftedu_20261103.webp",
+        "package_name": "com.mojang.minecraftedu",
+        "title": "Minecraft Education",
+        "categories": [
+          "simulation",
+          "sandbox",
+          "minecraft"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 79,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.aniplex.fategrandorder.en_20261103.webp",
+        "package_name": "com.aniplex.fategrandorder.en",
+        "title": "Fate/Grand Order (English)",
+        "categories": [
+          "anime",
+          "rpg",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1378,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ea.gp.nbamobile_20261103.webp",
+        "package_name": "com.ea.gp.nbamobile",
+        "title": "EA SPORTS™ NBA LIVE Mobile",
+        "categories": [
+          "sports&racing",
+          "sports"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1356,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.plarium.raidlegends_20261103.webp",
+        "package_name": "com.plarium.raidlegends",
+        "title": "RAID: Shadow Legends",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1377,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.whatsapp_20261103.webp",
+        "package_name": "com.whatsapp",
+        "title": "WhatsApp",
+        "categories": [
+          "apps",
+          "communication"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1310,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.newstargames.retrobowl_20261103.webp",
+        "package_name": "com.newstargames.retrobowl",
+        "title": "Retro Bowl",
+        "categories": [
+          "casual",
+          "sports&racing",
+          "sports",
+          "american_football"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1304,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.tocaboca.tocalifeworld_20261103.webp",
+        "package_name": "com.tocaboca.tocalifeworld",
+        "title": "Toca Boca World",
+        "categories": [
+          "simulation",
+          "life"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1367,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.plarium.mechlegion_20261103.webp",
+        "package_name": "com.plarium.mechlegion",
+        "title": "Mech Arena - Shooting Game",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1395,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.chess_20261103.webp",
+        "package_name": "com.chess",
+        "title": "Chess - Play and Learn Online",
+        "categories": [
+          "casual",
+          "single_player",
+          "strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 46,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bluepoch.m.en.reverse1999_20261103.webp",
+        "package_name": "com.bluepoch.m.en.reverse1999",
+        "title": "Reverse: 1999",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 36,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.gameloft.android.ANMP.GloftA9HM_20261103.webp",
+        "package_name": "com.gameloft.android.ANMP.GloftA9HM",
+        "title": "Asphalt Legends - Racing Game",
+        "categories": [
+          "sports&racing",
+          "racing",
+          "car_race"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1094,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ubisoft.rainbowsixmobile.r6.fps.pvp.shooter_20261103.webp",
+        "package_name": "com.ubisoft.rainbowsixmobile.r6.fps.pvp.shooter",
+        "title": "Rainbow Six Mobile",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1333,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.gryphline.endfield.gp_20261103.webp",
+        "package_name": "com.gryphline.endfield.gp",
+        "title": "Arknights: Endfield",
+        "categories": [
+          "action",
+          "rpg",
+          "anime",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1177,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bilibilihk.jujutsuphanparagp_20261103.webp",
+        "package_name": "com.bilibilihk.jujutsuphanparagp",
+        "title": "Jujutsu Kaisen Phantom Parade",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1338,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.mkarpenko.worldbox_20261103.webp",
+        "package_name": "com.mkarpenko.worldbox",
+        "title": "WorldBox - Sandbox God Sim",
+        "categories": [
+          "simulation",
+          "casual",
+          "strategy",
+          "sandbox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 39,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.tgc.sky.android_20261103.webp",
+        "package_name": "com.tgc.sky.android",
+        "title": "Sky: Children of the Light",
+        "categories": [
+          "rpg",
+          "casual",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1301,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.smilegate.chaoszero.stove.google_20261103.webp",
+        "package_name": "com.smilegate.chaoszero.stove.google",
+        "title": "Chaos Zero Nightmare",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1111,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miHoYo.bh3global_20261103.webp",
+        "package_name": "com.miHoYo.bh3global",
+        "title": "Honkai Impact 3rd",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1410,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.tencent.mhadv_20261103.webp",
+        "package_name": "com.tencent.mhadv",
+        "title": "Monster Hunter Outlanders",
+        "categories": [
+          "rpg",
+          "action",
+          "action_role-playing",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1318,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/me.funkin.fnf_20261103.webp",
+        "package_name": "me.funkin.fnf",
+        "title": "Friday Night Funkin'",
+        "categories": [
+          "casual",
+          "music",
+          "performance",
+          "rhythm_battle"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1365,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/air.com.lunime.gachalife2_20261103.webp",
+        "package_name": "air.com.lunime.gachalife2",
+        "title": "Gacha Life 2",
+        "categories": [
+          "simulation",
+          "casual",
+          "anime",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 94,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.opbrww_20261103.webp",
+        "package_name": "com.bandainamcoent.opbrww",
+        "title": "ONE PIECE Bounty Rush",
+        "categories": [
+          "action",
+          "anime",
+          "fighting"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 70,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.kitkagames.fallbuddies_20261103.webp",
+        "package_name": "com.kitkagames.fallbuddies",
+        "title": "Stumble Guys",
+        "categories": [
+          "action",
+          "casual",
+          "platformer"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 61,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.newspike_20261103.webp",
+        "package_name": "com.netease.newspike",
+        "title": "Blood Strike - FPS for all",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1314,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ea.game.pvz2_row_20261103.webp",
+        "package_name": "com.ea.game.pvz2_row",
+        "title": "Plants vs Zombies™ 2",
+        "categories": [
+          "strategy",
+          "tower_defense",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 28,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.YostarJP.BlueArchive_20261103.webp",
+        "package_name": "com.YostarJP.BlueArchive",
+        "title": "ブルーアーカイブ",
+        "categories": [
+          "anime",
+          "rpg",
+          "strategy",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 78,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.je.supersus_20261103.webp",
+        "package_name": "com.je.supersus",
+        "title": "Super Sus",
+        "categories": [
+          "strategy",
+          "asymmetrical_battle_arena"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1369,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/air.com.lunime.gachaclub_20261103.webp",
+        "package_name": "air.com.lunime.gachaclub",
+        "title": "Gacha Club",
+        "categories": [
+          "anime",
+          "simulation",
+          "casual",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1258,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.sega.persona5.the.phantomx.en_20261103.webp",
+        "package_name": "com.sega.persona5.the.phantomx.en",
+        "title": "P5X | Persona5: The Phantom X",
+        "categories": [
+          "rpg",
+          "anime",
+          "action",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 12,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ChillyRoom.DungeonShooter_20261103.webp",
+        "package_name": "com.ChillyRoom.DungeonShooter",
+        "title": "Soul Knight",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "roguelike"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1400,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.farlightgames.pgame.gp_20261103.webp",
+        "package_name": "com.farlightgames.pgame.gp",
+        "title": "Clash of Critters",
+        "categories": [
+          "strategy",
+          "tower_defense",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 33,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.YoStarEN.Arknights_20261103.webp",
+        "package_name": "com.YoStarEN.Arknights",
+        "title": "Arknights",
+        "categories": [
+          "strategy",
+          "anime",
+          "tower_defense",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1379,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.naver.line.android_20261103.webp",
+        "package_name": "jp.naver.line.android",
+        "title": "LINE: Calls & Messages",
+        "categories": [
+          "apps",
+          "communication"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 74,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.Shooter.ModernWarships_20261103.webp",
+        "package_name": "com.Shooter.ModernWarships",
+        "title": "Modern Warships: Naval Battles",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1363,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Zalith_Launcher.webp",
+        "package_name": "com.movtery.zalithlauncher.v2",
+        "title": "Zalith Launcher 2 for Minecraft",
+        "categories": [
+          "simulation",
+          "tools",
+          "sandbox",
+          "minecraft"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 45,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.konami.masterduel_20261103.webp",
+        "package_name": "jp.konami.masterduel",
+        "title": "Yu-Gi-Oh! Master Duel",
+        "categories": [
+          "strategy",
+          "card",
+          "card_battler"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 60,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.pokemon.pokemonunite_20261103.webp",
+        "package_name": "jp.pokemon.pokemonunite",
+        "title": "Pokémon UNITE",
+        "categories": [
+          "strategy",
+          "anime",
+          "moba"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1245,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.dfjssea_20261103.webp",
+        "package_name": "com.netease.dfjssea",
+        "title": "Racing Master",
+        "categories": [
+          "sports&racing",
+          "racing",
+          "car_race"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1155,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.roblox.client.vnggames_20261103.webp",
+        "package_name": "com.roblox.client.vnggames",
+        "title": "Roblox VN",
+        "categories": [
+          "simulation",
+          "casual",
+          "minecraft",
+          "sandbox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 76,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.partyglobal_20261103.webp",
+        "package_name": "com.netease.partyglobal",
+        "title": "Eggy Party: Trendy Party Game",
+        "categories": [
+          "simulation",
+          "casual",
+          "sandbox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1332,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.xd.xdtglobal.gp_20261103.webp",
+        "package_name": "com.xd.xdtglobal.gp",
+        "title": "Heartopia",
+        "categories": [
+          "simulation",
+          "life",
+          "social"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1327,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.co.mixi.monsterstrike_20261103.webp",
+        "package_name": "jp.co.mixi.monsterstrike",
+        "title": "モンスターストライク",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "puzzle_role-playing",
+          "physics-puzzle_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1345,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.supercell.hayday_20261103.webp",
+        "package_name": "com.supercell.hayday",
+        "title": "Hay Day",
+        "categories": [
+          "casual",
+          "simulation",
+          "management",
+          "farming"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 57,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_ark_survival_evolved.webp",
+        "package_name": "com.studiowildcard.wardrumstudios.ark",
+        "title": "ARK: Survival Evolved",
+        "categories": [
+          "simulation",
+          "adventure",
+          "survival",
+          "sandbox"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1157,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Fall_Guys.jpg",
+        "package_name": "com.Mediatonic.FallGuys_client",
+        "title": "Fall Guys",
+        "categories": [
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 10,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.sandboxol.blockymods_20261103.webp",
+        "package_name": "com.sandboxol.blockymods",
+        "title": "Blockman Go",
+        "categories": [
+          "casual",
+          "minigames"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 48,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.idv.googleplay_20261103.webp",
+        "package_name": "com.netease.idv.googleplay",
+        "title": "Identity V",
+        "categories": [
+          "strategy",
+          "asymmetrical_battle_arena"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 30,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.nexon.bluearchive_20261103.webp",
+        "package_name": "com.nexon.bluearchive",
+        "title": "Blue Archive",
+        "categories": [
+          "anime",
+          "rpg",
+          "strategy",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 9,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.king.candycrushsaga_20261103.webp",
+        "package_name": "com.king.candycrushsaga",
+        "title": "Candy Crush Saga",
+        "categories": [
+          "casual",
+          "puzzle",
+          "match_3"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1406,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.funplus.ts.global_20261103.webp",
+        "package_name": "com.funplus.ts.global",
+        "title": "Tiles Survive!",
+        "categories": [
+          "strategy",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1126,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.carxtech.carxdr2_20261103.webp",
+        "package_name": "com.carxtech.carxdr2",
+        "title": "CarX Drift Racing 2",
+        "categories": [
+          "sports&racing",
+          "racing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 29,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miHoYo.bh3oversea_20261103.webp",
+        "package_name": "com.miHoYo.bh3oversea",
+        "title": "Honkai Impact 3",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 69,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.sega.ColorfulStage.en_20261103.webp",
+        "package_name": "com.sega.ColorfulStage.en",
+        "title": "HATSUNE MIKU: COLORFUL STAGE!",
+        "categories": [
+          "anime",
+          "music",
+          "performance",
+          "arcade"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1235,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.mobilechess.gp_20261103.webp",
+        "package_name": "com.mobilechess.gp",
+        "title": "Magic Chess: Go Go",
+        "categories": [
+          "anime",
+          "strategy",
+          "auto_chess"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1384,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.idolmaster_gakuen_20261103.webp",
+        "package_name": "com.bandainamcoent.idolmaster_gakuen",
+        "title": "学園アイドルマスター",
+        "categories": [
+          "anime",
+          "simulation"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1354,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pz.life.android_20261103.webp",
+        "package_name": "com.pz.life.android",
+        "title": "Highrise: Dress Up Avatar Chat",
+        "categories": [
+          "simulation",
+          "life",
+          "social"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1312,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.nshmsea_20261103.webp",
+        "package_name": "com.netease.nshmsea",
+        "title": "SWORD OF JUSTICE",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 52,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.garena.game.kgth_20261103.webp",
+        "package_name": "com.garena.game.kgth",
+        "title": "Garena RoV: Abyssal Rift",
+        "categories": [
+          "strategy",
+          "moba"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1401,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.linecorp.LGTMTM_20261103.webp",
+        "package_name": "com.linecorp.LGTMTM",
+        "title": "LINE：ディズニー ツムツム",
+        "categories": [
+          "puzzle",
+          "match_3",
+          "casual",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1296,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bilibili.trickcal_20261103.webp",
+        "package_name": "com.bilibili.trickcal",
+        "title": "Trickcal:Chibi Go",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 42,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.kurogame.gplay.punishing.grayraven.en_20261103.webp",
+        "package_name": "com.kurogame.gplay.punishing.grayraven.en",
+        "title": "Punishing: Gray Raven",
+        "categories": [
+          "action",
+          "rpg",
+          "anime",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 62,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.riotgames.league.teamfighttactics_20261103.webp",
+        "package_name": "com.riotgames.league.teamfighttactics",
+        "title": "TFT: Teamfight Tactics",
+        "categories": [
+          "strategy",
+          "auto_chess"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 129,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.sololv_20261103.webp",
+        "package_name": "com.netmarble.sololv",
+        "title": "Solo Leveling:Arise",
+        "categories": [
+          "rpg",
+          "action",
+          "anime",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1123,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.infoldgames.infinitynikkien_20261103.webp",
+        "package_name": "com.infoldgames.infinitynikkien",
+        "title": "Infinity Nikki",
+        "categories": [
+          "casual",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1412,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Jurassic.webp",
+        "package_name": "com.ludia.jurassicworld",
+        "title": "Jurassic World™: The Game",
+        "categories": [
+          "simulation",
+          "management",
+          "single_player"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1242,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/Madoka_Magica_Magia_Exedra.webp",
+        "package_name": "com.aniplex.magia.exedra.en",
+        "title": "Madoka Magica Magia Exedra",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1385,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.devsisters.cc_20261103.webp",
+        "package_name": "com.devsisters.cc",
+        "title": "CookieRun: Crumble - Idle RPG",
+        "categories": [
+          "role_playing",
+          "rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 44,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.riotgames.league.wildrift_20261103.webp",
+        "package_name": "com.riotgames.league.wildrift",
+        "title": "League of Legends: Wild Rift",
+        "categories": [
+          "strategy",
+          "moba"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1346,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/io.supercent.linkedcubic_20261103.webp",
+        "package_name": "io.supercent.linkedcubic",
+        "title": "Snake Clash!",
+        "categories": [
+          "casual",
+          "action",
+          "io_game"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1391,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.ko_20261103.webp",
+        "package_name": "com.netease.ko",
+        "title": "Knives Out",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1289,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.harrypotter.na_20261103.webp",
+        "package_name": "com.netease.harrypotter.na",
+        "title": "Harry Potter: Magic Awakened™",
+        "categories": [
+          "rpg",
+          "strategy",
+          "role_playing",
+          "action-strategy",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1272,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.co.cygames.ShadowverseWorldsBeyond_20261103.webp",
+        "package_name": "jp.co.cygames.ShadowverseWorldsBeyond",
+        "title": "Shadowverse: Worlds Beyond",
+        "categories": [
+          "anime",
+          "strategy",
+          "card",
+          "card_battler"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1300,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.dblegends_jp_20261103.webp",
+        "package_name": "com.bandainamcoent.dblegends_jp",
+        "title": "ドラゴンボール レジェンズ",
+        "categories": [
+          "rpg",
+          "anime",
+          "strategy",
+          "action",
+          "fighting"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 13,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dreamgames.royalmatch_20261103.webp",
+        "package_name": "com.dreamgames.royalmatch",
+        "title": "Royal Match",
+        "categories": [
+          "casual",
+          "puzzle",
+          "match_3",
+          "match_3_adventure",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1099,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.farlightgames.igame.gp_20261103.webp",
+        "package_name": "com.farlightgames.igame.gp",
+        "title": "AFK Journey",
+        "categories": [
+          "rpg",
+          "strategy",
+          "casual",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1120,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.supercell.squad_20261103.webp",
+        "package_name": "com.supercell.squad",
+        "title": "Squad Busters",
+        "categories": [
+          "action",
+          "casual",
+          "io_game"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1402,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.grenge.pocolondungeons_20261103.webp",
+        "package_name": "jp.grenge.pocolondungeons",
+        "title": "ポコロンダンジョンズ",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "puzzle_role-playing",
+          "puzzle",
+          "match_3",
+          "single_player",
+          "anime"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1348,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.sybogames.subway.surfers.game_20261103.webp",
+        "package_name": "com.sybogames.subway.surfers.game",
+        "title": "Subway Surfers City",
+        "categories": [
+          "action",
+          "platformer",
+          "runner",
+          "arcade"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1180,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dgames.g65002005.google_20261103.webp",
+        "package_name": "com.dgames.g65002005.google",
+        "title": "CAPTAIN TSUBASA: ACE",
+        "categories": [
+          "sports&racing",
+          "anime",
+          "sports",
+          "casual",
+          "soccer"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 97,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.FishingPlanetLLC.FishingPlanet_20261103.webp",
+        "package_name": "com.FishingPlanetLLC.FishingPlanet",
+        "title": "Fishing Planet",
+        "categories": [
+          "simulation",
+          "casual",
+          "fishing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1387,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/game.qualiarts.hololive.dreams.jp_20261103.webp",
+        "package_name": "game.qualiarts.hololive.dreams.jp",
+        "title": "ホロライブドリームス",
+        "categories": [
+          "music",
+          "performance",
+          "sports&racing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 64,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.proximabeta.mf.uamo_20261103.webp",
+        "package_name": "com.proximabeta.mf.uamo",
+        "title": "Arena Breakout: Realistic FPS",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1290,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.archosaur.seareal.yslzm.gp_20261103.webp",
+        "package_name": "com.archosaur.seareal.yslzm.gp",
+        "title": "Life Makeover",
+        "categories": [
+          "simulation",
+          "casual",
+          "anime",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1278,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.wemadeconnect.aos.lostdgl_20261103.webp",
+        "package_name": "com.wemadeconnect.aos.lostdgl",
+        "title": "Lost Sword",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "idle_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1178,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.Shooter.ModernWarfront_20261103.webp",
+        "package_name": "com.Shooter.ModernWarfront",
+        "title": "MWT: Tank Battles",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1276,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.racerna_20261103.webp",
+        "package_name": "com.netease.racerna",
+        "title": "Ace Racer",
+        "categories": [
+          "sports&racing",
+          "racing",
+          "casual",
+          "car_race"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1237,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.smilegate.outerplane.stove.google_20261103.webp",
+        "package_name": "com.smilegate.outerplane.stove.google",
+        "title": "OUTERPLANE - Strategy Anime",
+        "categories": [
+          "rpg",
+          "casual",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1355,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.nanaori_20261103.webp",
+        "package_name": "com.netmarble.nanaori",
+        "title": "The Seven Deadly Sins: Origin",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1315,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bladetw.bd_20261103.webp",
+        "package_name": "com.bladetw.bd",
+        "title": "BLEACH: Soul Resonance",
+        "categories": [
+          "action",
+          "anime",
+          "rpg",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 34,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.YoStarEN.AzurLane_20261103.webp",
+        "package_name": "com.YoStarEN.AzurLane",
+        "title": "Azur Lane",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1251,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.h73.jhqyna_20261103.webp",
+        "package_name": "com.h73.jhqyna",
+        "title": "Once Human",
+        "categories": [
+          "action",
+          "action-adventure",
+          "survival",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1249,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.garena.game.df_20261103.webp",
+        "package_name": "com.garena.game.df",
+        "title": "Garena® Delta Force",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1357,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.devsisters.cos_20261103.webp",
+        "package_name": "com.devsisters.cos",
+        "title": "CookieRun: OvenSmash",
+        "categories": [
+          "action",
+          "strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1386,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/game.qualiarts.hololive.dreams.com_20261103.webp",
+        "package_name": "game.qualiarts.hololive.dreams.com",
+        "title": "hololive Dreams",
+        "categories": [
+          "music",
+          "performance"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1364,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.monster2_20261103.webp",
+        "package_name": "com.netmarble.monster2",
+        "title": "MONGIL: STAR DIVE",
+        "categories": [
+          "rpg",
+          "action",
+          "anime",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1293,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.panstudio.gplay.duetnightabyss.arpg.global_20261103.webp",
+        "package_name": "com.panstudio.gplay.duetnightabyss.arpg.global",
+        "title": "Duet Night Abyss",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 89,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.chillyroom.soulknightprequel_20261103.webp",
+        "package_name": "com.chillyroom.soulknightprequel",
+        "title": "Soul Knight Prequel",
+        "categories": [
+          "rpg",
+          "action",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1376,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pikpok.hrc.play_20261103.webp",
+        "package_name": "com.pikpok.hrc.play",
+        "title": "Rival Stars Horse Racing",
+        "categories": [
+          "sports&racing",
+          "casual",
+          "sports",
+          "racing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 51,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.garena.game.kgvn_20261103.webp",
+        "package_name": "com.garena.game.kgvn",
+        "title": "Garena Liên Quân Mobile",
+        "categories": [
+          "strategy",
+          "moba",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1383,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.aniplex.fategrandorder_20261103.webp",
+        "package_name": "com.aniplex.fategrandorder",
+        "title": "Fate/Grand Order",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "turn-based_rpg",
+          "single_player",
+          "anime"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1360,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ludia.tmnt_20261103.webp",
+        "package_name": "com.ludia.tmnt",
+        "title": "Ninja Turtles: Legends",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1285,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.garena.game.haikyu_20261103.webp",
+        "package_name": "com.garena.game.haikyu",
+        "title": "HAIKYU!! FLY HIGH",
+        "categories": [
+          "rpg",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1359,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.percent.royaldice_20261103.webp",
+        "package_name": "com.percent.royaldice",
+        "title": "Random Dice Defense : PvP TD",
+        "categories": [
+          "strategy",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1241,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.crunchyroll.eminenceinshadowrpg_20261103.webp",
+        "package_name": "com.crunchyroll.eminenceinshadowrpg",
+        "title": "The Eminence in Shadow RPG",
+        "categories": [
+          "rpg",
+          "anime",
+          "casual",
+          "role_playing",
+          "action-strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1347,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/io.supercent.pizzaidle_20261103.webp",
+        "package_name": "io.supercent.pizzaidle",
+        "title": "Pizza Ready!",
+        "categories": [
+          "casual",
+          "simulation",
+          "management",
+          "restaurant"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1342,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.digitalextremes.warframemobile_20261103.webp",
+        "package_name": "com.digitalextremes.warframemobile",
+        "title": "Warframe",
+        "categories": [
+          "action"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1288,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.mherosgb_20261103.webp",
+        "package_name": "com.netmarble.mherosgb",
+        "title": "MARVEL Future Fight",
+        "categories": [
+          "rpg",
+          "action",
+          "role_playing",
+          "action_role-playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1197,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.Sunborn.SnqxExilium.Glo_20261103.webp",
+        "package_name": "com.Sunborn.SnqxExilium.Glo",
+        "title": "GIRLS' FRONTLINE 2: EXILIUM",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 31,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miraclegames.farlight84_20261103.webp",
+        "package_name": "com.miraclegames.farlight84",
+        "title": "Farlight 84",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1409,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.garena.game.mho_20261103.webp",
+        "package_name": "com.garena.game.mho",
+        "title": "Monster Hunter Outlanders",
+        "categories": [
+          "action",
+          "rpg",
+          "action_role-playing",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1353,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.studiobside.starMain_20261103.webp",
+        "package_name": "com.studiobside.starMain",
+        "title": "StarSavior",
+        "categories": [
+          "anime",
+          "rpg",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 26,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.levelinfinite.hotta.gp_20261103.webp",
+        "package_name": "com.levelinfinite.hotta.gp",
+        "title": "Tower of Fantasy",
+        "categories": [
+          "anime",
+          "rpg",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1362,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.phanotek.wingsofduty_20261103.webp",
+        "package_name": "com.phanotek.wingsofduty",
+        "title": "Gunship Sequel: WW2",
+        "categories": [
+          "action",
+          "casual",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1275,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/sea.com.iwplay.p5x_20261103.webp",
+        "package_name": "sea.com.iwplay.p5x",
+        "title": "Persona5: The Phantom X™",
+        "categories": [
+          "rpg",
+          "anime",
+          "action",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 127,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.zy.wqmt.global_20261103.webp",
+        "package_name": "com.zy.wqmt.global",
+        "title": "Path to Nowhere",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "tactical",
+          "tower_defense"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 83,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.nanagb_20261103.webp",
+        "package_name": "com.netmarble.nanagb",
+        "title": "The Seven Deadly Sins",
+        "categories": [
+          "anime",
+          "rpg",
+          "role_playing",
+          "turn-based_rpg",
+          "casual"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1407,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.co.takaratomy.duelmastersplays_20261103.webp",
+        "package_name": "jp.co.takaratomy.duelmastersplays",
+        "title": "デュエル・マスターズ プレイス",
+        "categories": [
+          "card",
+          "card_battler",
+          "anime"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1361,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.yangcliu.zombsroyale_20261103.webp",
+        "package_name": "com.yangcliu.zombsroyale",
+        "title": "ZombsRoyale.io - Battle Royale",
+        "categories": [
+          "action",
+          "casual",
+          "io_game"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1350,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.boi.mementomori.android_20261103.webp",
+        "package_name": "jp.boi.mementomori.android",
+        "title": "MementoMori: AFKRPG",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "idle_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1114,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.sunborn.girlsfrontline.en_20261103.webp",
+        "package_name": "com.sunborn.girlsfrontline.en",
+        "title": "Girls' Frontline",
+        "categories": [
+          "strategy",
+          "casual",
+          "anime",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1269,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.xd.etheria.gp.glb_20261103.webp",
+        "package_name": "com.xd.etheria.gp.glb",
+        "title": "Etheria: Restart",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "turn-based_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1124,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.papegames.nn4.en_20261103.webp",
+        "package_name": "com.papegames.nn4.en",
+        "title": "Shining Nikki-Fashion Makeover",
+        "categories": [
+          "simulation",
+          "anime",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 71,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/cloudgame-icon/icon_Just-Rally-3%3A-World-Tour.webp",
+        "package_name": "com.MassolaRacing.JustRally3",
+        "title": "Just Rally 3: World Tour",
+        "categories": [
+          "sports&racing",
+          "racing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1132,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.devsisters.cba_20261103.webp",
+        "package_name": "com.devsisters.cba",
+        "title": "CookieRun: Tower of Adventures",
+        "categories": [
+          "action",
+          "action-adventure",
+          "adventure"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1382,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.blizzard.wtcg.hearthstone_20261103.webp",
+        "package_name": "com.blizzard.wtcg.hearthstone",
+        "title": "Hearthstone",
+        "categories": [
+          "card",
+          "card_battler",
+          "single_player",
+          "strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1371,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.dmg.supermarket.simulator_20261103.webp",
+        "package_name": "com.dmg.supermarket.simulator",
+        "title": "Store Manager Simulator 3D",
+        "categories": [
+          "simulation",
+          "casual",
+          "management"
+        ],
+        "need_login_google": true,
+        "status": 1
+      },
+      {
+        "id": 1295,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/net.wargaming.wot.blitz_20261103.webp",
+        "package_name": "net.wargaming.wot.blitz",
+        "title": "World of Tanks Blitz™",
+        "categories": [
+          "action",
+          "shooter",
+          "vehicle_combat"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 126,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.pearlabyss.blackdesertm.gl_20261103.webp",
+        "package_name": "com.pearlabyss.blackdesertm.gl",
+        "title": "Black Desert Mobile",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1117,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.archosaur.sea.yslzm.gp_20261103.webp",
+        "package_name": "com.archosaur.sea.yslzm.gp",
+        "title": "Life Makeover",
+        "categories": [
+          "simulation",
+          "casual",
+          "anime",
+          "lifestyle",
+          "dress-up"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 43,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.miHoYo.tot.glb_20261103.webp",
+        "package_name": "com.miHoYo.tot.glb",
+        "title": "Tears of Themis",
+        "categories": [
+          "anime",
+          "simulation",
+          "casual",
+          "adventure",
+          "interactive_story"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1238,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.VS.SteelAndFlesh2_20261103.webp",
+        "package_name": "com.VS.SteelAndFlesh2",
+        "title": "Steel And Flesh 2",
+        "categories": [
+          "strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1095,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ubisoft.the.division.mobile.combat.shooting.open.world.rpg_20261103.webp",
+        "package_name": "com.ubisoft.the.division.mobile.combat.shooting.open.world.rpg",
+        "title": "The Division Resurgence",
+        "categories": [
+          "action",
+          "shooter",
+          "tactical_shooter"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 95,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.gameark.ggplay.lonsea_20261103.webp",
+        "package_name": "com.gameark.ggplay.lonsea",
+        "title": "The Legend of Neverland",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1373,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.genmugame.prometheus_20261103.webp",
+        "package_name": "com.genmugame.prometheus",
+        "title": "ALLfiring: Voxel Action RPG",
+        "categories": [
+          "rpg",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1287,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.tentree.gp.un.mecharashi_20261103.webp",
+        "package_name": "com.tentree.gp.un.mecharashi",
+        "title": "Mecharashi",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1248,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.bandainamcoent.gget_WW_20261103.webp",
+        "package_name": "com.bandainamcoent.gget_WW",
+        "title": "SD Gundam G Generation ETERNAL",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 77,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.gravity.roo.sea_20261103.webp",
+        "package_name": "com.gravity.roo.sea",
+        "title": "Ragnarok Origin Global",
+        "categories": [
+          "anime",
+          "rpg",
+          "mmorpg",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1399,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/jp.gungho.pad_20261103.webp",
+        "package_name": "jp.gungho.pad",
+        "title": "パズル＆ドラゴンズ(Puzzle & Dragons)",
+        "categories": [
+          "rpg",
+          "puzzle_role-playing",
+          "role_playing",
+          "match_3",
+          "casual",
+          "puzzle"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1380,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netease.skzdhlrna_20261103.webp",
+        "package_name": "com.netease.skzdhlrna",
+        "title": "Lovebrush Chronicles",
+        "categories": [
+          "simulation",
+          "life",
+          "dating",
+          "casual",
+          "single_player",
+          "anime"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 63,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.riotgames.league.teamfighttacticsvn_20261103.webp",
+        "package_name": "com.riotgames.league.teamfighttacticsvn",
+        "title": "Đấu Trường Chân Lý",
+        "categories": [
+          "strategy"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1250,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.haoplay.game.and.exilium_20261103.webp",
+        "package_name": "com.haoplay.game.and.exilium",
+        "title": "GIRLS' FRONTLINE 2: EXILIUM",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "tactical"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1149,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.xd.ssrpgen_20261103.webp",
+        "package_name": "com.xd.ssrpgen",
+        "title": "Sword of Convallaria",
+        "categories": [
+          "rpg",
+          "tactical",
+          "single_player",
+          "role_playing"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1311,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.ujoy.reso_20261103.webp",
+        "package_name": "com.ujoy.reso",
+        "title": "Resonance Solstice",
+        "categories": [
+          "rpg",
+          "role_playing",
+          "mmorpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      },
+      {
+        "id": 1286,
+        "icon_url": "https://cloudmoon-1305370474.cos.ap-singapore.myqcloud.com/game-icons/com.netmarble.skiagb_20261103.webp",
+        "package_name": "com.netmarble.skiagb",
+        "title": "Seven Knights Idle Adventure",
+        "categories": [
+          "rpg",
+          "anime",
+          "role_playing",
+          "idle_rpg"
+        ],
+        "need_login_google": false,
+        "status": 1
+      }
+    ]
+  },
+  "message": "Success",
+  "_catalog_updated": "2026-11-13 14:22 UTC"
 }
