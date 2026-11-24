@@ -488,14 +488,6 @@
 
           <div class="p-6">
             
-            <!-- TEST: categories are extracted directly from each game's categories array -->
-            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar mb-6 pb-2">
-              <button @click="filterTestCategory(null)" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
-              <button v-for="cat in uiCategories" :key="'native-cat-'+String(cat.value)" @click="filterTestCategory(cat.value)" :class="activeCategory === cat.value ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
-                {{ cat.label }}
-              </button>
-            </div>
-
             <!-- VUE DRIVEN GRID (Using strict original method: selectGame) -->
             <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               <div 
@@ -556,6 +548,26 @@
                   <h3 class="font-bold text-xs truncate">{{g.title}}</h3>
                 </div>
               </div>
+            </div>
+          </section>
+
+          <!-- Categories: same visual section as before, populated from game-list categories -->
+          <section class="mb-8">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-lg font-black">Categories</h2>
+              <span class="text-[9px] text-gray-500 uppercase tracking-widest">From games</span>
+            </div>
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-2">
+              <button @click="filterTestCategory(null)"
+                :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white' : 'bg-[#222a31] text-gray-400'"
+                class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap uppercase tracking-wider">
+                All
+              </button>
+              <button v-for="cat in uiCategories" :key="'native-cat-'+String(cat.value)" @click="filterTestCategory(cat.value)"
+                :class="activeCategory === cat.value ? 'bg-[#7c4dff] text-white' : 'bg-[#222a31] text-gray-400'"
+                class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap uppercase tracking-wider">
+                {{cat.label}}
+              </button>
             </div>
           </section>
 
