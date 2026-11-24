@@ -1162,8 +1162,11 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
               filterTestCategory(vm.activeCategory === vm.defaultAllCategory ? null : vm.activeCategory);
             };
 
-            vm.$set(vm, 'filterTestCategory', filterTestCategory);
-            vm.$set(vm, 'handleTestSearch', handleTestSearch);
+            // Vue 2 does not proxy properties added to root data with
+            // vm.$set after instance creation. Template handlers must be
+            // assigned directly to the Vue instance.
+            vm.filterTestCategory = filterTestCategory;
+            vm.handleTestSearch = handleTestSearch;
 
             // Rebuild category buttons and reapply the current filter whenever
             // the native game list arrives or changes.
