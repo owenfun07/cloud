@@ -260,11 +260,10 @@
 
           <div class="p-6">
             
-            <!-- VUE DYNAMIC CATEGORY BUTTONS -->
+            <!-- Native categories: values come directly from each game's categories array -->
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar mb-6 pb-2">
-              <button @click="filterByCategory(defaultAllCategory)" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
-              
-              <button v-for="cat in uiCategories" :key="cat.id" @click="filterByCategory(cat.id)" :class="activeCategory === cat.id ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
+              <button @click="filterByCategory(null)" :class="activeCategory === defaultAllCategory ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">All</button>
+              <button v-for="cat in uiCategories" :key="'native-cat-'+String(cat.value)" @click="filterByCategory(cat.value)" :class="activeCategory === cat.value ? 'bg-[#7c4dff] text-white shadow-lg' : 'bg-[#222a31] text-gray-400 hover:text-white'" class="px-5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all uppercase tracking-wider">
                 {{ cat.label }}
               </button>
             </div>
@@ -623,26 +622,7 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
           });
       }
 
-      // --- DYNAMIC CATEGORY SNIFFER ---
-      if (vm.rawGames && vm.rawGames.length > 0 && vm.uiCategories.length === 0) {
-          const catMap = new Map();
-          vm.rawGames.forEach(g => {
-              if (Array.isArray(g.categories)) {
-                  g.categories.forEach(c => {
-                      const cStr = String(c);
-                      if (cStr === String(vm.defaultAllCategory) || cStr.toLowerCase() === 'all' || cStr === '0') return;
-                      const label = cStr.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-                      catMap.set(cStr, { id: c, label: label });
-                  });
-              }
-          });
-          
-          const extractedCats = Array.from(catMap.values());
-          if (extractedCats.length > 0) {
-              vm.$set(vm, 'uiCategories', extractedCats);
-              console.log(`[Dev] Dynamically mapped ${extractedCats.length} native categories from Vue state.`);
-          }
-      }
+      // Category discovery and filtering are installed in the CloudMoon UI bridge below.
 
       // --- DIRECT NATIVE API WATCHER WITH CACHING ---
       vm.$watch('selectedGame', function(newVal) {
@@ -771,6 +751,89 @@ const a0_0x2d34ce=a0_0x4a41;(function(_0x203d15,_0x45b043){const _0x410b73=a0_0x
     const app = document.getElementById('app');
     if (!app || !app.__vue__) return false;
     const vm = app.__vue__;
+
+    // Use the tested category implementation: build category chips from
+    // rawGames[].categories and filter that same native game array.
+    if (!vm.__cloudmoonNativeCategoryFilterInstalled) {
+      vm.__cloudmoonNativeCategoryFilterInstalled = true;
+
+      const getCategoryValue = category => {
+        if (category && typeof category === 'object') {
+          return category.value ?? category.slug ?? category.name ?? category.label ?? category.id;
+        }
+        return category;
+      };
+
+      const buildNativeCategories = () => {
+        const unique = new Map();
+        const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
+
+        games.forEach(game => {
+          if (!Array.isArray(game.categories)) return;
+          game.categories.forEach(rawCategory => {
+            const value = getCategoryValue(rawCategory);
+            if (value === undefined || value === null || String(value).trim() === '') return;
+            if (String(value).toLowerCase() === 'all' || String(value) === '0') return;
+            if (!unique.has(value)) {
+              const label = String(value)
+                .replace(/_/g, ' ')
+                .replace(/(^|[\\s-])\\w/g, letter => letter.toUpperCase());
+              unique.set(value, { id: value, value: value, label: label });
+            }
+          });
+        });
+
+        const categories = Array.from(unique.values())
+          .sort((a, b) => a.label.localeCompare(b.label));
+        vm.$set(vm, 'uiCategories', categories);
+        console.log('[CloudMoon] Native categories extracted from games:', categories);
+      };
+
+      const applyNativeCategoryFilter = selectedCategory => {
+        const value = selectedCategory && typeof selectedCategory === 'object'
+          ? (selectedCategory.value ?? selectedCategory.id)
+          : selectedCategory;
+        const isAll = value === undefined || value === null ||
+          value === vm.defaultAllCategory ||
+          (selectedCategory && selectedCategory.isAll === true);
+
+        vm.$set(vm, 'activeCategory', isAll ? vm.defaultAllCategory : value);
+
+        const query = String(vm.searchQuery || '').trim().toLowerCase();
+        const games = Array.isArray(vm.rawGames) ? vm.rawGames : [];
+        const filtered = games.filter(game => {
+          const categoryMatch = isAll ||
+            (Array.isArray(game.categories) && game.categories.includes(value));
+          const title = String(game.title || '').toLowerCase();
+          const packageName = String(game.pkg || game.id || '').toLowerCase();
+          const searchMatch = !query || title.includes(query) || packageName.includes(query);
+          return categoryMatch && searchMatch;
+        });
+
+        vm.$set(vm, 'filteredGames', filtered);
+        console.log('[CloudMoon] Category filter:', {
+          selectedCategory: isAll ? 'All' : value,
+          matched: filtered.length,
+          total: games.length
+        });
+      };
+
+      // Override the old obfuscated filter method on this Vue instance only.
+      vm.filterByCategory = selectedCategory => applyNativeCategoryFilter(selectedCategory);
+      vm.handleSearch = query => {
+        vm.$set(vm, 'searchQuery', String(query || '').toLowerCase());
+        applyNativeCategoryFilter(
+          vm.activeCategory === vm.defaultAllCategory ? null : vm.activeCategory
+        );
+      };
+
+      vm.$watch('rawGames', () => {
+        buildNativeCategories();
+        applyNativeCategoryFilter(
+          vm.activeCategory === vm.defaultAllCategory ? null : vm.activeCategory
+        );
+      }, { deep: true, immediate: true });
+    }
 
     if (!vm.__cloudmoonLiveInputAttached) {
       const inputEl = document.getElementById('input-div_input');
